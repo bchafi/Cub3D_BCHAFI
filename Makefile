@@ -15,9 +15,10 @@ LIBFT_DIR = libft
 MLX42FLAGS_LINUX= libmlx42_linux.a -Iinclude -ldl -lglfw -pthread -lm
 MLX42FLAGS_MAC= libmlx42_mac.a -Iinclude -L/goinfre/bchafi/homebrew/opt/glfw/lib -lglfw -fsanitize=address,undefined
 
+PARSE = validate_map/parsing.c
 RAYCAST = raycasting/utils.c raycasting/player.c  raycasting/init_actor_data.c raycasting/input.c  raycasting/ft_free.c raycasting/draw.c raycasting/vec_utils.c
 
-SRC = main.c $(RAYCAST)
+SRC = main.c $(RAYCAST) $(PARSE)
 
 OBJ = $(SRC:.c=.o)
 
@@ -41,4 +42,4 @@ clean:
 fclean: clean
 	$(RM) $(NAME)
 
-re: fclean all
+re: all clean

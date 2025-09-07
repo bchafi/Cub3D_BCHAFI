@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yrhandou <yrhandou@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: bchafi <bchafi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 13:48:15 by yrhandou          #+#    #+#             */
-/*   Updated: 2025/08/28 12:35:42 by yrhandou         ###   ########.fr       */
+/*   Updated: 2025/09/07 14:56:09 by bchafi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ typedef struct s_list
 	struct s_list	*next;
 }	t_list;
 
+int		ft_strcmp(const char *s1, const char *s2);
 int		ft_count_words(char *str, char delimiter);
 char	*ft_strndup(const char *s, size_t n);
 long	ft_atoi_modified(const char *str);

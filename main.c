@@ -16,7 +16,10 @@ int main(int ac, char **av)
 {
 	t_cube cub;
 	if (ac != 2)
+	{
+		write(2, "** Uncomplite Argument **\n", 27);
 		exit(1000);
+	}
 	if (!cub_init(&cub, av[1]))
 		return (1);
 	draw_map(&cub);

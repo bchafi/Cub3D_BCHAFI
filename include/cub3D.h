@@ -6,7 +6,7 @@
 /*   By: bchafi <bchafi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 12:05:06 by yrhandou          #+#    #+#             */
-/*   Updated: 2025/09/07 12:10:53 by bchafi           ###   ########.fr       */
+/*   Updated: 2025/09/07 14:02:30 by bchafi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,14 @@
 
 
 // <<<<<<<<<<<< Start Parsng >>>>>>>>>>>>
-#include <unistd.h>
+#include <fcntl.h>
 
 // typedef struct info
 // {
 	
 // }	t_info;
-char **parsing_map(int fd, char **arg);
+char **parsing_map(int fd);
+
 
 // <<<<<<<<<<<<< End Parsng >>>>>>>>>>>>>>
 

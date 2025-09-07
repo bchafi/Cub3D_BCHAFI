@@ -6,7 +6,7 @@
 /*   By: bchafi <bchafi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 11:49:20 by yrhandou          #+#    #+#             */
-/*   Updated: 2025/09/07 12:10:26 by bchafi           ###   ########.fr       */
+/*   Updated: 2025/09/07 15:49:27 by bchafi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,18 +120,17 @@ t_player *init_playerData(t_cube *cub)
 	return (plyr);
 }
 
-static int init_mapData(t_cube *cub, char *arg)
+static int init_mapData(t_cube *cub, int fd)
 {
 	cub->map = set_map();
-
-	(void)*arg;
-	// cub->map = parcing_map(cub, arg);
+	cub->map = parsing_map(fd);
 	if(!cub->map)
 		return (0);
 	// char *line;
 	// while ((line = get_next_line(fd)))
 	// {
-	// 	/* code */
+	// 	printf("%s", line);
+	// 	free(line);
 	// }
 	cub->MapImg = mlx_new_image(cub->mlx, WIDTH, HEIGHT);
 	if (!cub->MapImg)
@@ -144,36 +143,40 @@ static int init_mapData(t_cube *cub, char *arg)
 	return (1);
 }
 
-
-int	check_arg_map(char *arg)
+int	check_file(char *arg)
 {
 	int	len;
 	int	fd;
 
+	len = ft_strlen(arg);
+	if (len < 4 || ft_strcmp(arg + len - 4, ".cub") != 0)
+	{
+		write(2, "the file is not final `.cub`.\n", 31);
+		exit(1001);
+	}
+	fd = open(arg, O_DIRECTORY, 666);
+	if (fd >= 0)
+	{
+		close(fd);
+		write(2, "the arg is a folder.\n", 22);
+		exit(1002);
+	}
 	fd = open(arg, O_RDWR, 666);
 	if (fd < 0)
 	{
-		close(fd);
-		ft_error("**the file is not exist.**");
-	}
-	len = ft_strlen(arg);
-	if (len < 4)
-		return (-1);
-	if (ft_strcmp(arg + len - 4, ".ber"))
-	{
-		close(fd);
-		ft_error("**the file is not final with .ber.**");
+		write(2, "the file is not exist.\n", 24);
+		exit(1002);
 	}
 	return (fd);
 }
 
 int cub_init(t_cube *cub, char *arg)
 {
-	check_file(arg);
+	int fd = check_file(arg);
 	cub->mlx = mlx_init(WIDTH, HEIGHT, "Cub3D", 1);
 	if (!cub->mlx)
 		return (0);
-	if(!init_mapData(cub, arg))
+	if(!init_mapData(cub, fd))
 		return (mlx_terminate(cub->mlx), 0);
 	cub->plyr = init_playerData(cub);
 	if (!cub->plyr)
