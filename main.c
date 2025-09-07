@@ -12,10 +12,10 @@
 
 #include "include/cub3D.h"
 
-int main(int argc, char const *argv[])
+int main(int ac, char **av)
 {
 	t_cube cub;
-	if (argc != 2)
+	if (ac != 2)
 		exit(1000);
 	if (!cub_init(&cub, av[1]))
 		return (1);

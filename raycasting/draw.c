@@ -6,7 +6,7 @@
 /*   By: bchafi <bchafi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 17:09:02 by yrhandou          #+#    #+#             */
-/*   Updated: 2025/09/07 09:55:20 by bchafi           ###   ########.fr       */
+/*   Updated: 2025/09/07 11:54:12 by bchafi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ void draw_map(void *param)
 				color = GREY;
 			else
 				color = GREEN;
-			obj = set_obj(TILE_SIZE, TILE_SIZE, &(mlx_instance_t){pos2d.X * 32, pos2d.Y * 32, true, true}, color);
+			obj = set_obj(TILE_SIZE, TILE_SIZE, &(mlx_instance_t){pos2d.X * 32, pos2d.Y * 32, 1, true}, color);
 			draw_rectangle(cub->MapImg, &obj);
 			pos2d.X++;
 		}

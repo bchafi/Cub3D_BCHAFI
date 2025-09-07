@@ -6,7 +6,7 @@
 /*   By: bchafi <bchafi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/05 11:09:01 by yrhandou          #+#    #+#             */
-/*   Updated: 2025/09/07 09:51:25 by bchafi           ###   ########.fr       */
+/*   Updated: 2025/09/07 11:51:48 by bchafi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ t_player *set_PlyrPosition(char **map)
 				plyr->direction = map[i][j];
 				update_vec(&plyr->mapPosition ,j, i);
 				worldPosition = scaleToInstance(plyr->mapPosition);
-				update_vec(&worldPosition, worldPosition.X, worldPosition.Y);
+				update_vec(&worldPosition ,worldPosition.X, worldPosition.Y);
 				return (plyr);
 			}
 			j++;

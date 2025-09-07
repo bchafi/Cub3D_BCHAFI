@@ -1,7 +1,13 @@
-NO 
-SO 
-WE 
-EA 
+NO ./textures/wall_north.xpm
+SO ./textures/wall_south.xpm
+WE ./textures/wall_west.xpm
+EA ./textures/wall_east.xpm
 
-F 
-S 
+F 220,100,0
+C 225,30,0
+
+111111111111111
+100000000000001
+101100000000001
+100000000000001
+111111111111111

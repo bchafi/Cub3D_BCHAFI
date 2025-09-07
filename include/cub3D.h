@@ -6,7 +6,7 @@
 /*   By: bchafi <bchafi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 12:05:06 by yrhandou          #+#    #+#             */
-/*   Updated: 2025/09/07 10:09:18 by bchafi           ###   ########.fr       */
+/*   Updated: 2025/09/07 12:10:53 by bchafi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,14 @@
 
 
 // <<<<<<<<<<<< Start Parsng >>>>>>>>>>>>
-
+#include <unistd.h>
 
 // typedef struct info
 // {
 	
 // }	t_info;
-char **parsing();
+char **parsing_map(int fd, char **arg);
+
 // <<<<<<<<<<<<< End Parsng >>>>>>>>>>>>>>
 
 
@@ -87,7 +88,7 @@ typedef struct s_cube
 
 
 /*------------------*/
-int cub_init(t_cube *cub);
+int cub_init(t_cube *cub, char *arg);
 void ft_close(void *param);
 void mlx_cleanup(t_cube *cub);
 void handle_mouse_events(mouse_key_t button, action_t action, modifier_key_t mods, void* param);

@@ -6,12 +6,17 @@
 /*   By: bchafi <bchafi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 11:49:20 by yrhandou          #+#    #+#             */
-/*   Updated: 2025/09/07 10:04:36 by bchafi           ###   ########.fr       */
+/*   Updated: 2025/09/07 12:10:26 by bchafi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3D.h"
 
+// -----------
+
+
+
+// -----------
 
 
 static mlx_instance_t *set_plyrInstancePos(t_player *plyr, mlx_instance_t *inst)
@@ -115,12 +120,19 @@ t_player *init_playerData(t_cube *cub)
 	return (plyr);
 }
 
-static int init_mapData(t_cube *cub)
+static int init_mapData(t_cube *cub, char *arg)
 {
-	// cub->map = set_map();
-	cub->map = parcing_map();
+	cub->map = set_map();
+
+	(void)*arg;
+	// cub->map = parcing_map(cub, arg);
 	if(!cub->map)
 		return (0);
+	// char *line;
+	// while ((line = get_next_line(fd)))
+	// {
+	// 	/* code */
+	// }
 	cub->MapImg = mlx_new_image(cub->mlx, WIDTH, HEIGHT);
 	if (!cub->MapImg)
 		return (free_arr((void **)cub->map), 0);
@@ -133,13 +145,35 @@ static int init_mapData(t_cube *cub)
 }
 
 
-int cub_init(t_cube *cub)
+int	check_arg_map(char *arg)
 {
+	int	len;
+	int	fd;
+
+	fd = open(arg, O_RDWR, 666);
+	if (fd < 0)
+	{
+		close(fd);
+		ft_error("**the file is not exist.**");
+	}
+	len = ft_strlen(arg);
+	if (len < 4)
+		return (-1);
+	if (ft_strcmp(arg + len - 4, ".ber"))
+	{
+		close(fd);
+		ft_error("**the file is not final with .ber.**");
+	}
+	return (fd);
+}
+
+int cub_init(t_cube *cub, char *arg)
+{
+	check_file(arg);
 	cub->mlx = mlx_init(WIDTH, HEIGHT, "Cub3D", 1);
 	if (!cub->mlx)
 		return (0);
-
-	if(!init_mapData(cub))
+	if(!init_mapData(cub, arg))
 		return (mlx_terminate(cub->mlx), 0);
 	cub->plyr = init_playerData(cub);
 	if (!cub->plyr)
