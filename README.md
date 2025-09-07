@@ -1,2 +1,2 @@
-# Cub3D_BCHAFI
-3d GAME
+# cub3D
+Creating a 3d wolfstein clone
