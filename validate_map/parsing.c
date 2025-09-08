@@ -6,11 +6,12 @@
 /*   By: bchafi <bchafi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/07 10:06:14 by bchafi            #+#    #+#             */
-/*   Updated: 2025/09/07 15:57:34 by bchafi           ###   ########.fr       */
+/*   Updated: 2025/09/08 09:04:48 by bchafi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3D.h"
+
 
 char **parsing_map(int fd)
 {
