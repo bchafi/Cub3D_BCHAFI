@@ -1,45 +1,56 @@
+# Compiler
 CC = cc
+CFLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address
 
-RM = rm -rf
-
-CFLAGS = -Wall -Wextra -Werror -g
-
-LIBFT = libft.a
-
-LIBFT_SRC = $(wildcard $(LIBFT_DIR)/*.c)
-
-LIBFT_OBJ = $(wildcard $(LIBFT_DIR)/*.o)
-
-LIBFT_DIR = libft
-
-MLX42FLAGS_LINUX= libmlx42_linux.a -Iinclude -ldl -lglfw -pthread -lm
-MLX42FLAGS_MAC= libmlx42_mac.a -Iinclude -L/goinfre/bchafi/homebrew/opt/glfw/lib -lglfw -fsanitize=address,undefined
-
-PARSE = validate_map/parsing.c
-RAYCAST = raycasting/utils.c raycasting/player.c  raycasting/init_actor_data.c raycasting/input.c  raycasting/ft_free.c raycasting/draw.c raycasting/vec_utils.c
-
-SRC = main.c $(RAYCAST) $(PARSE)
-
-OBJ = $(SRC:.c=.o)
-
+# Executable name
 NAME = cub3D
+
+# Libraries
+LIBFT_DIR = utils/libft
+PRINTF_DIR = utils/ft_printf
+GNL_DIR = utils/get_next_line
+
+LIBFT = $(LIBFT_DIR)/libft.a
+PRINTF = $(PRINTF_DIR)/ft_printf.a
+GNL = $(GNL_DIR)/get_next_line.a
+
+# Sources of your project (only your own .c files)
+SOURCES = \
+	main.c \
+	validate_map/parsing.c validate_map/ft_split.c \
+
+OBJECTS = $(SOURCES:.c=.o)
+
+# ===================== RULES =====================
 
 all: $(NAME)
 
-$(NAME): $(OBJ) $(LIBFT)
-	$(CC) $(CFLAGS) $^ $(MLX42FLAGS_MAC) -o $@ $(LIBFT)
+$(NAME): $(OBJECTS) $(LIBFT) $(PRINTF) $(GNL)
+	@$(CC) $(CFLAGS) $(OBJECTS) $(LIBFT) $(PRINTF) $(GNL) -o $(NAME)
+	@echo "DONE Compiler Cub3D!!"
 
-$(LIBFT): $(LIBFT_SRC)
-	make -C libft all
-	mv libft/libft.a validate_map/get_next_line/get_next_line.a .
+%.o: %.c cub3D.h
+	@$(CC) $(CFLAGS) -c $< -o $@
 
-%.o: %.c include/cub3D.h libft/libft.h
-	$(CC) $(CFLAGS) -c $< -o $@
-
+$(LIBFT):
+	@$(MAKE) -C $(LIBFT_DIR)
+	@echo "DONE Compiler LIBFT!!"
+$(PRINTF):
+	@$(MAKE) -C $(PRINTF_DIR)
+	@echo "DONE Compiler PRINTF!!"
+$(GNL):
+	@$(MAKE) -C $(GNL_DIR)
+	@echo "DONE Compiler GNL!!"
 clean:
-	$(RM) $(OBJ)
+	@rm -f $(OBJECTS)
+	@$(MAKE) -C $(LIBFT_DIR) clean
+	@$(MAKE) -C $(PRINTF_DIR) clean
+	@$(MAKE) -C $(GNL_DIR) clean
 
 fclean: clean
-	$(RM) $(NAME)
+	@rm -f $(NAME)
+	@$(MAKE) -C $(LIBFT_DIR) fclean
+	@$(MAKE) -C $(PRINTF_DIR) fclean
+	@$(MAKE) -C $(GNL_DIR) fclean
 
 re: all clean
