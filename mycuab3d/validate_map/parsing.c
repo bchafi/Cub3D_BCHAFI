@@ -6,7 +6,7 @@
 /*   By: bchafi <bchafi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/07 10:06:14 by bchafi            #+#    #+#             */
-/*   Updated: 2025/09/12 09:05:04 by bchafi           ###   ########.fr       */
+/*   Updated: 2025/09/12 10:03:36 by bchafi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,7 @@ void free2D(char **array)
 
 void free_textures(t_var *vars)
 {
+	// printf("NO: %s\nSO: %s\nWE: %s\nEA: %s\n", vars->NO, vars->SO, vars->WE, vars->EA);
 	free(vars->NO);
 	vars->NO = NULL;
 	free(vars->SO);
@@ -203,7 +204,6 @@ int valide_Color(char **rgb)
 	{
 		j = 0;
 		char *slice = ft_strtrim(rgb[i], " ");
-		printf("`%s`\n", slice);
 		if (!check_isnum(slice))
 			return (free(slice), 0);
 		free(slice);
@@ -213,36 +213,10 @@ int valide_Color(char **rgb)
 	return (1);
 }
 
-// ----------------------------
-// Check Colors
-// ----------------------------
-int check_color(t_var *var, char *line, int is_floor)
-{
-    int i = 1;
-	char *side;
+int store_rgb(t_var *var, int is_floor, char **slice_rgb)
+{	
 	int r, g, b;
-
-	i = 1;
-	side = ft_strndup(line, 2);
-	if (!side)
-		return (write(2, "Wrong RGB Color!!\n", 19), free(side), 0);
-    while (line[i] == ' ' || line[i] == '\t')
-        i++;
-	char *rgb_str = ft_strdup(line + i);
-	if (!rgb_str)
-		return (write(2, "Wrong RGB Color!!\n", 19), free(side), 0);
-	char **slice_rgb = ft_split(rgb_str, ',', var);
-	ft_printf("Side: %s, RGB_str: %s, SIZE: %d, I: %c\n", side, rgb_str, var->count_rgb, rgb_str[0]);
-	if (var->count_rgb != 3 || rgb_str[0] == ',')
-	{
-		write(2, "Error RGB Color `len`!!\n", 25);
-		return (free(side), free(rgb_str), free2D(slice_rgb), 0);
-	}
-	if (!valide_Color(slice_rgb))
-		return (free(side), free(rgb_str), free2D(slice_rgb), 0);
-
-	// ✅ trim safely and free after atoi
-    char *tmp_r = ft_strtrim(slice_rgb[0], " \t\n");
+	char *tmp_r = ft_strtrim(slice_rgb[0], " \t\n");
     char *tmp_g = ft_strtrim(slice_rgb[1], " \t\n");
     char *tmp_b = ft_strtrim(slice_rgb[2], " \t\n");
 
@@ -254,21 +228,49 @@ int check_color(t_var *var, char *line, int is_floor)
     free(tmp_b);
     if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255)
 	{
-		free(side);
-		free(rgb_str);
 		free2D(slice_rgb);
-		printf("%d/%d/%d\n", r, g, b);
         return (write(2, "RGB values must be 0-255!!\n", 28), 0);
 	}
     if (is_floor)
         var->floor_color = (r << 16) | (g << 8) | b;
     else
         var->earth_color = (r << 16) | (g << 8) | b;
+	return (1);
+}
+
+// ----------------------------
+// Check Colors
+// ----------------------------
+int check_color(t_var *var, char *line, int is_floor)
+{
+	char	*side;
+	char	*rgb_str;
+	char	**slice_rgb;
+	int		i;
+
+	i = 1;
+	side = ft_strndup(line, 2);
+	if (!side)
+		return (write(2, "Wrong RGB Color!!\n", 19), free(side), 0);
+    while (line[i] == ' ' || line[i] == '\t')
+        i++;
+	rgb_str = ft_strdup(line + i);
+	if (!rgb_str)
+		return (write(2, "Wrong RGB Color!!\n", 19), free(side), 0);
+	slice_rgb = ft_split(rgb_str, ',', var);
+	if (var->count_rgb != 3 || rgb_str[0] == ',')
+	{
+		write(2, "Error RGB Color `len`!!\n", 25);
+		return (free(side), free(rgb_str), free2D(slice_rgb), 0);
+	}
+	if (!valide_Color(slice_rgb))
+		return (free(side), free(rgb_str), free2D(slice_rgb), 0);
+	
+	if (!store_rgb(var, is_floor, slice_rgb))
+		return (free(side), free(rgb_str), 0);
     free2D(slice_rgb);
 	free(side);
 	free(rgb_str);
-	printf("%d / ", var->floor_color);
-	printf("%d\n", var->earth_color);
     return (1);
 }
 
@@ -285,7 +287,7 @@ t_var *check_sides_tex(char **file_line, t_var *vars)
 
 	if (!initial_state(vars))
 		return (NULL);
-	printf("== TEXTURES | COLORS==\n");
+	// printf("== TEXTURES | COLORS==\n");
     while (file_line[i] != NULL)
     {	
 		char *trimed = ft_strtrim(file_line[i], " \n\t");
@@ -298,9 +300,9 @@ t_var *check_sides_tex(char **file_line, t_var *vars)
         }
 		if (is_line_map(trimed))
 		{
-			if (len == 6)
-				return (printf("ok\n"), free(trimed), vars->map_index = i, vars);
-			write(2, "Missing texture/color configuration!\n", 38);
+			if (len != 6)
+				write(2, "Missing texture/color configuration1!\n", 38);return (free(trimed), vars->map_index = i, vars);
+			
 			free(trimed);
 			free_textures(vars);
 			return (NULL);			
@@ -310,9 +312,9 @@ t_var *check_sides_tex(char **file_line, t_var *vars)
             !ft_strncmp("WE ", trimed, 3) ||
             !ft_strncmp("EA ", trimed, 3))
         {
-            if (is_seeing(file_line, trimed, i, 3))
+            if (is_seeing(file_line, trimed, i, 3) || file_line[i][0] == ' ')
 			{
-				write(2, "Duplicate texture/color configuration!\n", 40);
+				write(2, "Errpr\n: Duplicate texture/color configuration2!\n", 40);
 				free(trimed);
 				free_textures(vars);
                 return (NULL);
@@ -328,9 +330,9 @@ t_var *check_sides_tex(char **file_line, t_var *vars)
         else if (!ft_strncmp("F ", trimed, 2) ||
                  !ft_strncmp("C ", trimed, 2))
         {
-            if (is_seeing(file_line, trimed, i, 2))
+            if (is_seeing(file_line, trimed, i, 2) || file_line[i][0] == ' ')
 			{
-				write(2, "texture/color configuration!!\n", 31);
+				write(2, "texture/color configuration3!!\n", 31);
 				free(trimed);
 				free_textures(vars);
                 return (NULL);
@@ -339,13 +341,11 @@ t_var *check_sides_tex(char **file_line, t_var *vars)
 			{
 				if (!check_color(vars, trimed, 1))
 					return (free(trimed), free_textures(vars), NULL);
-				len++;
 			}
 			else if (!ft_strncmp("C ", trimed, 2))
 			{
 				if (!check_color(vars, trimed, 0))
 					return (free(trimed), free_textures(vars), NULL);
-				len++;
 			}
 			len++;
         }
