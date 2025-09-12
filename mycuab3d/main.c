@@ -12,11 +12,11 @@
 
 #include "cub3D.h"
 
-void f(){system("leaks cub3D");}
+void f(){system("leaks -quiet cub3D");}
 
 int main(int ac, char **av)
 {
-	// atexit(f);
+	atexit(f);
 	t_var vars;
 
 	if (ac != 2)
@@ -29,18 +29,24 @@ int main(int ac, char **av)
 	if (!vars.read_file)
 		return (1);
 	if(!check_sides_tex(vars.read_file, &vars))
-		return (free2D(vars.read_file), ft_printf("ss\n"), 1);
-	// if (!check_texturs(vars.read_file, vars))
-	// 	return (free2D(vars.read_file), free2D(vars.s_color), free2D(vars.s_tex), 1);
-	// int i = 0;
-	printf("== TEXTURES | COLORS==\n");
-    for (int i = 0; i < 6; i++)
-        printf("%s -> %s\n", vars.keyval[i].key, vars.keyval[i].value);
+		return (free2D(vars.read_file), 1);
 	
-	while (*vars.read_file != NULL)
-	{
-		printf("%s", *vars.read_file);
-		vars.read_file++;
-	}
-	return (free2D(vars.read_file), 0);
+	
+	return (free2D(vars.read_file), free_textures(&vars), 0);// 
 }
+
+	// if (!check_texturs(vars.read_file, vars))
+	// 	return (free2D(vars.read_file), 1);
+	// int i = 0;
+	
+	// while (*vars.read_file != NULL)
+	// {
+	// 	printf("%s", *vars.read_file);
+	// 	vars.read_file++;
+	// }
+	// printf("NO : %s\n", vars.NO);
+	// printf("SO : %s\n", vars.SO);
+	// printf("WE : %s\n", vars.WE);
+	// printf("EA : %s\n", vars.EA);
+	// printf("F : %s\n", vars.F);
+	// printf("C : %s\n", vars.C);

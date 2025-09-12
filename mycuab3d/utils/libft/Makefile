@@ -6,7 +6,7 @@
 #    By: bchafi <bchafi@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/08 16:15:01 by bchafi            #+#    #+#              #
-#    Updated: 2025/09/10 12:56:06 by bchafi           ###   ########.fr        #
+#    Updated: 2025/09/10 21:54:46 by bchafi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,7 @@ OBJECTSB = $(SOURCESB:.c=.o)
 
 CC = cc
 AR = ar
-CFLAGS = -Wall -Wextra -Werror -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror# -fsanitize=address
 
 all: $(NAME)
 

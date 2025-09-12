@@ -128,3 +128,10 @@ Parse the `.cub` file lines and:
 ---
 
 
+
+
+> string after the keyword of the color
+> slice it by split
+> check lenght must == 3 args.
+> take every part of argb:
+  - trimed it by removing ` \n\t`

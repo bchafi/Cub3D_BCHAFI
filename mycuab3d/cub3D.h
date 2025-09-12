@@ -6,7 +6,7 @@
 /*   By: bchafi <bchafi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 10:19:09 by bchafi            #+#    #+#             */
-/*   Updated: 2025/09/10 11:57:44 by bchafi           ###   ########.fr       */
+/*   Updated: 2025/09/12 01:29:27 by bchafi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,19 +31,19 @@ typedef struct var
 {
     int     line_lines;
     char    **read_file;
-    char	**s_tex;
-	char	**s_color;
-	int		tx_count;
-	int		c_count;
-    char    *no;
-    char    *so;
-    char    *we;
-    char    *ea;
-	char    *f;
-	char    *c;
-    int     count;
+    char    *NO;
+    char    *SO;
+    char    *WE;
+    char    *EA;
+	char    *F;
+	char    *C;
+    int     map_index;
     t_kval *keyval;
     int     count_rgb;
+    char    **rgb_out;
+    int     floor_color;
+    int     earth_color;
+    
 }   t_var;
 
 
@@ -55,8 +55,8 @@ void    read2D(char **array, int len);
 char    **get_map(int fd, char *arg, t_var *vars);
 int     is_seeing(char **file_line, char *side, int end, int flag);
 t_var   *check_sides_tex(char **file_line, t_var *vars);
-int     check_tex(t_var *var, char *line, char *side, t_kval *kval);
+int     check_tex(t_var *var, char *line);
 char	**ft_split(char const *s, char c, t_var *var);
-
+void    free_textures(t_var *vars);
 
 #endif

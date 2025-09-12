@@ -6,7 +6,7 @@
 /*   By: bchafi <bchafi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 00:11:44 by bchafi            #+#    #+#             */
-/*   Updated: 2024/11/08 10:05:15 by bchafi           ###   ########.fr       */
+/*   Updated: 2025/09/12 01:53:39 by bchafi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static int	long_number64(int sign)
 {
 	if (sign == 1)
 		return (-1);
-	return (0);
+	return (-1);
 }
 
 int	ft_atoi(const char *str)

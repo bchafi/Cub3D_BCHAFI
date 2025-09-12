@@ -1,13 +1,15 @@
-NO ./textures/wall_north.png
-SO ./textures/wall_south.png
-WE ./textures/wall_west.png
-EA ./textures/wall_west.png
 
-C 225,30,0
-F 220,d100,0
+
+    NO /mnt/homes/bchafi/Desktop/Cub3D_BCHAFI/mycuab3d/map/textures/satorupng 2.png    
+        SO    /mnt/homes/bchafi/Desktop/Cub3D_BCHAFI/mycuab3d/map/textures/satorupng 3.png  
+    WE    /mnt/homes/bchafi/Desktop/Cub3D_BCHAFI/mycuab3d/map/textures/satorupng 4.png   
+  EA /mnt/homes/bchafi/Desktop/Cub3D_BCHAFI/mycuab3d/map/textures/satorupng.png
+   
+    F 222  ,     22   ,22
+    C 22   ,  33,  3    
 
 111111111111111
-100000000000001
+
 101100000000001
 100000000000001
 111111111111111

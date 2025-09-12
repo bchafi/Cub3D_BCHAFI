@@ -1,6 +1,6 @@
 # Compiler
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror# -g3 -fsanitize=address
 
 # Executable name
 NAME = cub3D
