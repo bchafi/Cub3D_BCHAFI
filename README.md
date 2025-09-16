@@ -1,8 +1,3 @@
-Perfect 👍 you’re now at the stage where your **main parsing logic is wired in**.
-Let me give you a **clean roadmap** for this function in a compact, colored style (like a dev “cheat sheet” / flowchart in text).
-
----
-
 # Roadmap for `main()` in Cub3D Parsing
 
 ---
