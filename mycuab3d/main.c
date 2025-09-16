@@ -14,6 +14,8 @@
 
 void f(){system("leaks -quiet cub3D");}
 
+
+
 int main(int ac, char **av)
 {
 	atexit(f);
@@ -21,18 +23,21 @@ int main(int ac, char **av)
 
 	if (ac != 2)
 	{
-		write(2, "** Uncomplite Argument **\n", 27);
+		Error("** Uncomplite Argument **");
 		return (1);
 	}
 	int fd = check_file(av[1]);
 	vars.read_file = get_map(fd, av[1], &vars);
 	if (!vars.read_file)
 		return (1);
-	if(!check_sides_tex(vars.read_file, &vars))
+	if(!check_configuration(vars.read_file, &vars))
 		return (free2D(vars.read_file), 1);
-	
-	
-	return (free2D(vars.read_file), free_textures(&vars), 0);// 
+	/* Deployment */
+	// Valid(&vars);
+	/* cleanup */
+    free2D(vars.read_file);
+    free_textures(&vars);
+	return (0);
 }
 
 	// if (!check_texturs(vars.read_file, vars))

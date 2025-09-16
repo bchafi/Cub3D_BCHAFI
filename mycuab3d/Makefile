@@ -17,7 +17,8 @@ GNL = $(GNL_DIR)/get_next_line.a
 # Sources of your project (only your own .c files)
 SOURCES = \
 	main.c \
-	validate_map/parsing.c validate_map/ft_split.c \
+	validate_map/parsing.c validate_map/check_configure.c validate_map/configuration_tools.c validate_map/function_out.c \
+	validate_map/ft_split.c \
 
 OBJECTS = $(SOURCES:.c=.o)
 

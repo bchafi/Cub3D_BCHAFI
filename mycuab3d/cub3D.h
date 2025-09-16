@@ -6,7 +6,7 @@
 /*   By: bchafi <bchafi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 10:19:09 by bchafi            #+#    #+#             */
-/*   Updated: 2025/09/12 01:29:27 by bchafi           ###   ########.fr       */
+/*   Updated: 2025/09/16 11:41:01 by bchafi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,15 @@
 #include "utils/libft/libft.h"
 #include "utils/ft_printf/ft_printf.h"
 
+
+#define RED "\e[0;31m"
+#define GRN "\e[0;32m"
+#define URED "\e[4;31m"
+#define UGRN "\e[4;32m"
+#define BHRED "\e[1;91m"
+#define BHGRN "\e[1;92m"
+#define reset "\e[0m"
+
 typedef struct kval
 {
     char *key;
@@ -34,29 +43,51 @@ typedef struct var
     char    *NO;
     char    *SO;
     char    *WE;
-    char    *EA;
-	char    *F;
-	char    *C;
-    int     map_index;
-    t_kval *keyval;
-    int     count_rgb;
-    char    **rgb_out;
+    char    *EA;    
     int     floor_color;
+    int     map_index;
     int     earth_color;
+    int     count_rgb;
+    char    *tmp_r;
+    char    *tmp_g;
+    char    *tmp_b;
     
 }   t_var;
-
-
-
-
-int     check_file(char *arg);
+// Parsing.c
+void    Error(char *str);
 void    free2D(char **array);
+int     check_file(char *arg);
 void    read2D(char **array, int len);
 char    **get_map(int fd, char *arg, t_var *vars);
-int     is_seeing(char **file_line, char *side, int end, int flag);
-t_var   *check_sides_tex(char **file_line, t_var *vars);
-int     check_tex(t_var *var, char *line);
-char	**ft_split(char const *s, char c, t_var *var);
+
+// Funciton_out.c
+t_var   *initial_state(t_var *vars);
 void    free_textures(t_var *vars);
+void    Error(char *str);
+void    free2D(char **array);
+int     is_seeing(char **file_line, char *side, int end, int n);
+void    Valid(t_var *vars); //
+ 
+// configuration_tools.c
+int     is_line_map(char *file_line);
+int     handle_texture_line(t_var *vars, char **file_line, char *trimed, int i);
+int     handle_color_line(t_var *vars, char **file_line, char *trimed, int i);
+int     type_file_line(t_var *vars, char **file_line, char *trimed, int i, int *len);
+int     check_file_lines(char **file_line, t_var *vars, int *len);
+
+// check_configur.c
+int     check_tex(t_var *var, char *line);
+int     check_isnum(char *rgb_num);
+int     valide_Color(char **rgb);
+int     store_rgb(t_var *var, int is_floor, char **slice_rgb);
+int     check_color(t_var *var, char *line, int is_floor);
+t_var   *check_configuration(char **file_line, t_var *vars);
+
+
+// funciton
+char	**ft_split(char const *s, char c, t_var *var);
+
+
+
 
 #endif
