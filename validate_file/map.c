@@ -6,7 +6,7 @@
 /*   By: bchafi <bchafi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 11:21:01 by bchafi            #+#    #+#             */
-/*   Updated: 2025/09/18 10:00:41 by bchafi           ###   ########.fr       */
+/*   Updated: 2025/09/18 10:23:59 by bchafi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ char **get_map(t_var *vars, char **file, int start)
     if (!maping)
         return (Error("Allocation Fail maping!!"), NULL);
     i = 0;
+    ft_printf("i: %d, map: %s\n", vars->map_index, file[start]);
     while (file[start] && start < vars->len_lines)
     {
         maping[i] = ft_strtrim(file[start], "\n");

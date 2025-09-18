@@ -6,7 +6,7 @@
 /*   By: bchafi <bchafi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 10:07:45 by bchafi            #+#    #+#             */
-/*   Updated: 2025/09/18 09:56:00 by bchafi           ###   ########.fr       */
+/*   Updated: 2025/09/18 10:35:26 by bchafi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,11 +148,14 @@ t_var *check_configuration(char **file_line, t_var *vars)
 			return (free_textures(vars), NULL);
         return (vars);
     }
-    if (len != 6)
+    if (len != 6 || 
+	)
     {
         Error("Missing texture/color configuration 1");
         return (free_textures(vars), NULL);
     }
+	else
+        return (Error("Where is the Map!"), 0);
     return (vars);
 }
 

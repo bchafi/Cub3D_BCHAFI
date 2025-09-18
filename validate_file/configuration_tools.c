@@ -6,7 +6,7 @@
 /*   By: bchafi <bchafi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 10:07:45 by bchafi            #+#    #+#             */
-/*   Updated: 2025/09/18 09:59:56 by bchafi           ###   ########.fr       */
+/*   Updated: 2025/09/18 10:33:45 by bchafi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ int type_file_line(t_var *vars, char **file_line, char *trimed, int i, int *len)
 {
     if (is_line_map(trimed))
     {
-        printf("%d\n", *len);
         if (*len != 6)
             return (Error("Missing texture/color configuration 2!"), 0);
         return ((*len)++, vars->map_index = i, 2);
