@@ -6,7 +6,7 @@
 /*   By: bchafi <bchafi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 10:19:09 by bchafi            #+#    #+#             */
-/*   Updated: 2025/09/16 11:41:01 by bchafi           ###   ########.fr       */
+/*   Updated: 2025/09/17 13:45:13 by bchafi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,27 +38,30 @@ typedef struct kval
 
 typedef struct var
 {
-    int     line_lines;
-    char    **read_file;
-    char    *NO;
-    char    *SO;
-    char    *WE;
-    char    *EA;    
-    int     floor_color;
-    int     map_index;
-    int     earth_color;
-    int     count_rgb;
-    char    *tmp_r;
-    char    *tmp_g;
-    char    *tmp_b;
-    
+    int				len_lines;
+    char			**read_file;
+    char			*NO;
+    char			*SO;
+    char			*WE;
+    char			*EA;    
+    int				floor_color;
+    int             map_index;
+    unsigned int    earth_color;
+    unsigned int    count_rgb;
+    char            *tmp_r;
+    char            *tmp_g;
+    char            *tmp_b;
+    int             lines_map;
+    char            **map;
+    int             len_width;
+    char            **map_s;
 }   t_var;
 // Parsing.c
 void    Error(char *str);
 void    free2D(char **array);
 int     check_file(char *arg);
 void    read2D(char **array, int len);
-char    **get_map(int fd, char *arg, t_var *vars);
+char    **get_full_file(int fd, char *arg, t_var *vars);
 
 // Funciton_out.c
 t_var   *initial_state(t_var *vars);
@@ -82,6 +85,9 @@ int     valide_Color(char **rgb);
 int     store_rgb(t_var *var, int is_floor, char **slice_rgb);
 int     check_color(t_var *var, char *line, int is_floor);
 t_var   *check_configuration(char **file_line, t_var *vars);
+
+// map.c
+char    **check_map(t_var *vars);
 
 
 // funciton

@@ -14,6 +14,12 @@
 
 void f(){system("leaks -quiet cub3D");}
 
+// char **get_map1(t_var *vars, char **file, int start)
+// {
+//     vars->map = &file[start];
+//     return (vars->map);
+// }
+
 
 
 int main(int ac, char **av)
@@ -27,31 +33,17 @@ int main(int ac, char **av)
 		return (1);
 	}
 	int fd = check_file(av[1]);
-	vars.read_file = get_map(fd, av[1], &vars);
+	vars.read_file = get_full_file(fd, av[1], &vars);
 	if (!vars.read_file)
 		return (1);
 	if(!check_configuration(vars.read_file, &vars))
 		return (free2D(vars.read_file), 1);
 	/* Deployment */
-	// Valid(&vars);
+	Valid(&vars);
 	/* cleanup */
     free2D(vars.read_file);
     free_textures(&vars);
+    free2D(vars.map);
+    // free2D(vars.map_s);
 	return (0);
 }
-
-	// if (!check_texturs(vars.read_file, vars))
-	// 	return (free2D(vars.read_file), 1);
-	// int i = 0;
-	
-	// while (*vars.read_file != NULL)
-	// {
-	// 	printf("%s", *vars.read_file);
-	// 	vars.read_file++;
-	// }
-	// printf("NO : %s\n", vars.NO);
-	// printf("SO : %s\n", vars.SO);
-	// printf("WE : %s\n", vars.WE);
-	// printf("EA : %s\n", vars.EA);
-	// printf("F : %s\n", vars.F);
-	// printf("C : %s\n", vars.C);

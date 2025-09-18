@@ -55,7 +55,7 @@ fd = open(arg, O_RDWR, 666);
 
 ---
 
-## 🌟 `get_map()` – Roadmap / Cheat Sheet
+## 🌟 `get_full_file()` – Roadmap / Cheat Sheet
 
 | Step | Action                            | Notes                                                                      |
 | ---- | --------------------------------- | -------------------------------------------------------------------------- |
@@ -64,7 +64,7 @@ fd = open(arg, O_RDWR, 666);
 | 3️⃣  | **Reopen file**                   | `close(fd)` then `fd = open(arg, O_RDONLY)` to start reading lines again   |
 | 4️⃣  | **Fill 2D array**                 | `file2D[i++] = file` for each line read with `get_next_line`               |
 | 5️⃣  | **Null-terminate array**          | `file2D[i] = NULL`                                                         |
-| 6️⃣  | **Set line count**                | `vars->line_lines = i`                                                     |
+| 6️⃣  | **Set line count**                | `vars->len_lines = i`                                                     |
 | 7️⃣  | **Return array**                  | Return `file2D` (caller must free)                                         |
 | ⚠️   | **Error Handling**                | Empty file → print error + close fd; malloc fail → close fd + return NULL  |
 

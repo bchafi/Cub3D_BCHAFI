@@ -6,7 +6,7 @@
 /*   By: bchafi <bchafi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/07 10:06:14 by bchafi            #+#    #+#             */
-/*   Updated: 2025/09/16 11:31:25 by bchafi           ###   ########.fr       */
+/*   Updated: 2025/09/17 15:22:38 by bchafi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void read2D(char **array, int len)
 	}
 }
 
-char **get_map(int fd, char *arg, t_var *vars)
+char **get_full_file(int fd, char *arg, t_var *vars)
 {
 	char *file;
 	int i;
@@ -103,5 +103,5 @@ char **get_map(int fd, char *arg, t_var *vars)
 	while (file)
 		(1) && (file2D[i++] = file, file = get_next_line(fd));
 	(1) && (file2D[i] = NULL);
-	return (close(fd), vars->line_lines = i, file2D);
+	return (close(fd), vars->len_lines = i, file2D);
 }

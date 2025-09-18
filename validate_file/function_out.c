@@ -6,7 +6,7 @@
 /*   By: bchafi <bchafi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 10:07:45 by bchafi            #+#    #+#             */
-/*   Updated: 2025/09/16 11:40:49 by bchafi           ###   ########.fr       */
+/*   Updated: 2025/09/17 15:01:53 by bchafi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,6 @@ void free_textures(t_var *vars)
 	vars->EA = NULL;
 }
 
-
-
-
 int is_seeing(char **file_line, char *side, int end, int n)
 {
 	int i;
@@ -58,17 +55,11 @@ void Valid(t_var *vars)
 {
     int i;
 
-    if (!vars || !vars->read_file)
+    if (!vars || !vars->map)
         return;
-
     i = 0;
-    while (vars->read_file[i] != NULL)
-    {
-        ft_printf("%s", vars->read_file[i]);
-        i++;
-    }
-	
-    ft_printf("-------/* Deployment */------\n");
+	ft_printf("Line_file: %d, line_map: %d\n", vars->len_lines, vars->map_index);
+    ft_printf("                        -------/* Configuration */------\n");
     ft_printf("vars->NO : %s\n", vars->NO ? vars->NO : "(null)");
     ft_printf("vars->SO : %s\n", vars->SO ? vars->SO : "(null)");
     ft_printf("vars->WE : %s\n", vars->WE ? vars->WE : "(null)");
@@ -78,4 +69,12 @@ void Valid(t_var *vars)
     ft_printf(GRN UGRN BHGRN);
 	ft_printf("<<<<<<< Everythhing IS Done >>>>>>\n");
     ft_printf(reset);
+	// ft_printf("******* Map *******\n");
+    // while (vars->map[i] != NULL)
+    // {
+    //     ft_printf("%s\n", vars->map[i]);
+	// 	if (i == vars->lines_map - 1)
+    //     	ft_printf("\n");
+    //     i++;
+    // }
 }
