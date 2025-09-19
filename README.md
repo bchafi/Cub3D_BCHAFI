@@ -141,6 +141,8 @@ Parse the `.cub` file lines and:
 
 
 
-- The map must be closed/surrounded by walls -> return an error.
-
-
+- The map must be closed/surrounded by walls -> if not return an error.
+- each type of element (Config file NO,SO,WE,EA) can be separated by one or more empty lines.
+- the map content always has to be the last in the file.
+- each type of element (Config file) can be set in any order in the file.
+- The map must be parsed as it looks in the file. Spaces are a valid part of the map and are up to you to handle. You must be able to parse any kind of map, as long as it respects the rules of the map.

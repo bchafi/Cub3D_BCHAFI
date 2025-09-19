@@ -6,8 +6,9 @@ EA /mnt/homes/bchafi/Desktop/Cub3D_BCHAFI/map/textures/satorupng.png
 F 255,255,255
 C 20,33,3
 
-111111
-100001
+  111111111
+11100001
 10N001
-
-111111
+10N00011
+ 10000001
+11111111

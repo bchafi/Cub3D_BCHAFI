@@ -6,7 +6,7 @@
 /*   By: bchafi <bchafi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 10:19:09 by bchafi            #+#    #+#             */
-/*   Updated: 2025/09/19 10:33:24 by bchafi           ###   ########.fr       */
+/*   Updated: 2025/09/19 11:57:48 by bchafi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,11 +87,17 @@ int     check_color(t_var *var, char *line, int is_floor);
 t_var   *check_configuration(char **file_line, t_var *vars);
 
 // map.c
-char    **find_valid_map(t_var *vars);
 char    *multi_space(int len);
-char    **get_map(t_var *vars, char **file, int start);
 int     find_map_start(char **file);
+char    **get_map(t_var *vars, char **file, int start);
 char    **map_copy_s(t_var *var, char **map);
+int     find_valid_map(t_var *vars);
+
+// valide_map.c
+int     is_valid_tile(char c);
+int     check_surrounded(char **map, int i, int j);
+int     validate_walls(char **map);
+int     validate_map(t_var *var, char **map_s);
 
 
 // funciton

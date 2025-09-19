@@ -6,7 +6,7 @@
 /*   By: bchafi <bchafi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 11:21:01 by bchafi            #+#    #+#             */
-/*   Updated: 2025/09/19 10:43:34 by bchafi           ###   ########.fr       */
+/*   Updated: 2025/09/19 12:01:43 by bchafi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 char *multi_space(int len)
 {
-    char *line = malloc(len + 1);
+    char *line = malloc(len + 3);
     if (!line)
         return (NULL);
     int i = -1;
@@ -55,7 +55,7 @@ char **get_map(t_var *vars, char **file, int start)
     count = 0;
     i = start;
     while (file[i])
-        (1) && (count++, i++);  
+        (1) && (count++, i++);
     maping = malloc(sizeof(char *) * (count + 1));
     if (!maping)
         return (Error("Allocation Fail maping!!"), NULL);
@@ -74,51 +74,57 @@ char **get_map(t_var *vars, char **file, int start)
 
 char **map_copy_s(t_var *var, char **map)
 {
-    int i = 0;
+    int i;
     int j;
-    int size = var->lines_map + 2; // +2 for top and bottom borders
-    char **squer_map = malloc(sizeof(char *) * (size + 1));
+    char **squer_map;
+    int size;
+
+    i = 0;
+    size = var->lines_map + 2;
+    squer_map = malloc(sizeof(char *) * (size + 1));
     if (!squer_map)
         return (NULL);
-
-    // Top border
-    squer_map[0] = multi_space(var->len_width + 2);
-
-    // Copy map rows, padding with spaces
+    squer_map[0] = multi_space(var->len_width);
+    if (!squer_map[0])
+        return (free2D(squer_map), NULL);
     while (map[i])
     {
-        int len = ft_strlen(map[i]);
-        squer_map[i + 1] = malloc(var->len_width + 3); // +2 for borders +1 for \0
+        squer_map[i + 1] = malloc(var->len_width + 3);
         if (!squer_map[i + 1])
             return (free2D(squer_map), NULL);
-
-        squer_map[i + 1][0] = ' '; // left border
-        for (j = 0; j < var->len_width; j++)
+        memset(squer_map[i + 1], ' ', var->len_width + 2);
+        squer_map[i + 1][var->len_width + 2] = '\0';
+        j = 0;
+        while (map[i][j])
         {
-            if (j < len)
-                squer_map[i + 1][j + 1] = map[i][j];
-            else
-                squer_map[i + 1][j + 1] = ' '; // pad with space
+            squer_map[i + 1][j + 1] = map[i][j];
+            j++;
         }
-        squer_map[i + 1][j + 1] = ' '; // right border
-        squer_map[i + 1][j + 2] = '\0';
         i++;
     }
-
-    // Bottom border
-    squer_map[i + 1] = multi_space(var->len_width + 2);
+    squer_map[i + 1] = multi_space(var->len_width);
     squer_map[i + 2] = NULL;
-
-    return squer_map;
+    return (squer_map);
 }
 
-char    **find_valid_map(t_var *vars)
+int find_valid_map(t_var *vars)
 {
     vars->map = get_map(vars, vars->read_file, vars->map_index);
     if (!vars->map)
-        return (NULL);
+        return (0);
     vars->map_s = map_copy_s(vars, vars->map);
     if (!vars->map_s)
-        return (free2D(vars->map), Error("Can't Squer the map!"), NULL);
-    return (vars->map);
+    {
+        free2D(vars->map);
+        Error("Can't Squer the map!");
+        return (0);
+    }
+    // here
+    if (!validate_map(vars, vars->map_s))
+    {
+        free2D(vars->map);
+        free2D(vars->map_s);
+        return (0);
+    }
+    return (1);
 }

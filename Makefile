@@ -18,7 +18,7 @@ GNL = $(GNL_DIR)/get_next_line.a
 SOURCES = \
 	main.c \
 	validate_file/parsing.c validate_file/check_configure.c validate_file/configuration_tools.c validate_file/function_out.c \
-	validate_file/ft_split.c validate_file/map.c\
+	validate_file/ft_split.c validate_file/map.c validate_file/valide_map.c\
 
 OBJECTS = $(SOURCES:.c=.o)
 

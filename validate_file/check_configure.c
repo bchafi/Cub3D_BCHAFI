@@ -6,7 +6,7 @@
 /*   By: bchafi <bchafi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 10:07:45 by bchafi            #+#    #+#             */
-/*   Updated: 2025/09/19 10:41:11 by bchafi           ###   ########.fr       */
+/*   Updated: 2025/09/19 10:47:48 by bchafi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,7 +142,7 @@ t_var *check_configuration(char **file_line, t_var *vars)
         return (free_textures(vars), NULL);
     if (result == 2)
     {
-        ft_printf(UGRN "configuration Is Ok.\n" reset);
+        // ft_printf(UGRN "configuration Is Ok.\n" reset);
         return (vars);
     }
     if (len != 6)
