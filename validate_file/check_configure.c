@@ -6,7 +6,7 @@
 /*   By: bchafi <bchafi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 10:07:45 by bchafi            #+#    #+#             */
-/*   Updated: 2025/09/18 10:35:26 by bchafi           ###   ########.fr       */
+/*   Updated: 2025/09/19 10:41:11 by bchafi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,26 +136,20 @@ t_var *check_configuration(char **file_line, t_var *vars)
 
     if (!initial_state(vars))
         return (NULL);
-
+	
     result = check_file_lines(file_line, vars, &len);
     if (result == 0)
         return (free_textures(vars), NULL);
     if (result == 2)
     {
         ft_printf(UGRN "configuration Is Ok.\n" reset);
-		vars->map = check_map(vars);
-		if (!vars->map)
-			return (free_textures(vars), NULL);
         return (vars);
     }
-    if (len != 6 || 
-	)
+    if (len != 6)
     {
         Error("Missing texture/color configuration 1");
         return (free_textures(vars), NULL);
     }
-	else
-        return (Error("Where is the Map!"), 0);
     return (vars);
 }
 

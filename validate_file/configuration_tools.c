@@ -6,7 +6,7 @@
 /*   By: bchafi <bchafi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 10:07:45 by bchafi            #+#    #+#             */
-/*   Updated: 2025/09/18 10:33:45 by bchafi           ###   ########.fr       */
+/*   Updated: 2025/09/19 09:18:40 by bchafi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,19 @@
 
 int is_line_map(char *file_line)
 {
-    int i;
-
-	i = 0;
+    int i = 0;
+    if (!file_line || !*file_line)
+        return (0);
     while (file_line[i])
     {
-        if (file_line[i] == '0' || file_line[i] == '1'
-			|| file_line[i] == ' ' || file_line[i] == '\t')
-            i++;
-        else
+        if (file_line[i] != '0' && file_line[i] != '1'
+            && file_line[i] != ' ' && file_line[i] != '\t')
             return (0);
+        i++;
     }
     return (1);
 }
+
 
 int handle_texture_line(t_var *vars, char **file_line, char *trimed, int i)
 {

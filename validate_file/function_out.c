@@ -6,7 +6,7 @@
 /*   By: bchafi <bchafi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 10:07:45 by bchafi            #+#    #+#             */
-/*   Updated: 2025/09/18 10:19:15 by bchafi           ###   ########.fr       */
+/*   Updated: 2025/09/19 10:40:36 by bchafi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,9 @@ t_var *initial_state(t_var *vars)
 	vars->SO = NULL;
 	vars->WE = NULL;
 	vars->EA = NULL;
-	vars->map_index = -1;
+	vars->map_index = find_map_start(vars->read_file);
+    if (vars->map_index < 0)
+        return (Error("No valid map found &!"), NULL);;
 	return (vars);
 }
 
@@ -68,13 +70,21 @@ void Valid(t_var *vars)
     // ft_printf("vars->earth_color : %d\n", vars->earth_color);
     // ft_printf(GRN UGRN BHGRN);
 	// ft_printf("<<<<<<< Everythhing IS Done >>>>>>\n");
-    ft_printf(reset);
-	ft_printf("******* Map *******\n");
+    // ft_printf(reset);
+	// write(1, "******* Map *******\n", 21);
     while (vars->map[i] != NULL)
     {
-        ft_printf("%s\n", vars->map[i]);
-		if (i == vars->lines_map - 1)
-        	ft_printf("\n");
+        write(1, vars->map[i], ft_strlen(vars->map[i]));
+		write(1, "\n", 1);
+        i++;
+    }
+	if (!vars->map_s)
+		return;
+	i = 0;
+	while (vars->map_s[i] != NULL)
+    {
+        write(1, vars->map_s[i], ft_strlen(vars->map_s[i]));
+		write(1, "\n", 1);
         i++;
     }
 }

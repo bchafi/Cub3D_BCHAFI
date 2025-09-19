@@ -130,3 +130,17 @@ Parse the `.cub` file lines and:
 > check lenght must == 3 args.
 > take every part of argb:
   - trimed it by removing ` \n\t`
+
+
+
+
+
+
+
+
+
+
+
+- The map must be closed/surrounded by walls -> return an error.
+
+

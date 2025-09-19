@@ -38,12 +38,15 @@ int main(int ac, char **av)
 		return (1);
 	if(!check_configuration(vars.read_file, &vars))
 		return (free2D(vars.read_file), 1);
+	vars.map = find_valid_map(&vars);
+	if (!vars.map)
+		return (free2D(vars.read_file), free_textures(&vars), 1);
 	/* Deployment */
 	Valid(&vars);
 	/* cleanup */
-    free2D(vars.read_file);
-    free_textures(&vars);
-    free2D(vars.map);
-    // free2D(vars.map_s);
+    free2D(vars.read_file); // get_full_file
+    free_textures(&vars); // check_configuration
+    free2D(vars.map); // find_valid_map
+    // free2D(vars.map_s); //find_valid_map
 	return (0);
 }
