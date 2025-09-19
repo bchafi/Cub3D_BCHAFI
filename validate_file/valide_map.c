@@ -6,59 +6,48 @@
 /*   By: bchafi <bchafi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 11:21:01 by bchafi            #+#    #+#             */
-/*   Updated: 2025/09/19 11:58:54 by bchafi           ###   ########.fr       */
+/*   Updated: 2025/09/19 13:32:47 by bchafi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3D.h"
 
-int is_valid_tile(char c)
+int is_valid_char(char c)
 {
-	return (c == '0' || c == '1'
-		|| c == 'N' || c == 'S'
-		|| c == 'E' || c == 'W'
-		|| c == ' ');
+    return (c == '0' || c == '1' ||
+            c == 'N' || c == 'S' || c == 'E' || c == 'W' ||
+            c == ' ');
 }
 
-int check_surrounded(char **map, int i, int j)
+int validate_map(t_var *vars)
 {
-	if (map[i][j] == '0' || map[i][j] == 'N' || map[i][j] == 'S' ||
-		map[i][j] == 'E' || map[i][j] == 'W')
-	{
-		if (map[i - 1][j] == ' ' || map[i + 1][j] == ' ' ||
-			map[i][j - 1] == ' ' || map[i][j + 1] == ' ' ||
-			map[i - 1][j] == '\0' || map[i + 1][j] == '\0')
-			return (0);
-	}
-	return (1);
-}
+    int i, j;
+    int player_count = 0;
 
-int validate_walls(char **map)
-{
-	int i, j;
+    for (i = 1; vars->map_s[i + 1]; i++)
+    {
+        for (j = 1; vars->map_s[i][j]; j++)
+        {
+            char c = vars->map_s[i][j];
 
-	i = 0;
-	while (map[i])
-	{
-		j = 0;
-		while (map[i][j])
-		{
-			if (!is_valid_tile(map[i][j]))
-				return (Error("Invalid char in map!"), 0);
-			if (!check_surrounded(map, i, j))
-				return (Error("Map not closed by walls!"), 0);
-			j++;
-		}
-		i++;
-	}
-	return (1);
-}
+            if (!is_valid_char(c))
+                return (Error("Invalid character in map"), 0);
 
-int validate_map(t_var *var, char **map_s)
-{
-	(void)var;
-	if (!validate_walls(map_s))
-		return (0);
+            if (c == 'N' || c == 'S' || c == 'E' || c == 'W')
+                player_count++;
 
-	return 1;
+            if (c == '0' || c == 'N' || c == 'S' || c == 'E' || c == 'W')
+            {
+                if (vars->map_s[i-1][j] == ' ' || vars->map_s[i+1][j] == ' ' ||
+                    vars->map_s[i][j-1] == ' ' || vars->map_s[i][j+1] == ' ')
+                {
+                    return (Error("Map not surrounded by walls"), 0);
+                }
+            }
+        }
+    }
+    if (player_count != 1)
+        return (Error("Map must contain exactly one player spawn"), 0);
+
+    return (1);
 }

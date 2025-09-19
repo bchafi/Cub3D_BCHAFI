@@ -6,7 +6,7 @@
 /*   By: bchafi <bchafi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 11:21:01 by bchafi            #+#    #+#             */
-/*   Updated: 2025/09/19 12:01:43 by bchafi           ###   ########.fr       */
+/*   Updated: 2025/09/19 13:36:50 by bchafi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,38 +74,43 @@ char **get_map(t_var *vars, char **file, int start)
 
 char **map_copy_s(t_var *var, char **map)
 {
-    int i;
-    int j;
+    int i, j;
     char **squer_map;
-    int size;
+    int size = var->lines_map + 2;
 
-    i = 0;
-    size = var->lines_map + 2;
     squer_map = malloc(sizeof(char *) * (size + 1));
     if (!squer_map)
         return (NULL);
-    squer_map[0] = multi_space(var->len_width);
-    if (!squer_map[0])
-        return (free2D(squer_map), NULL);
-    while (map[i])
+
+    // Top line (walls)
+    squer_map[0] = malloc(var->len_width + 3);
+    memset(squer_map[0], '1', var->len_width + 2);
+    squer_map[0][var->len_width + 2] = '\0';
+
+    // Map lines
+    for (i = 0; map[i]; i++)
     {
         squer_map[i + 1] = malloc(var->len_width + 3);
-        if (!squer_map[i + 1])
-            return (free2D(squer_map), NULL);
-        memset(squer_map[i + 1], ' ', var->len_width + 2);
+        memset(squer_map[i + 1], '1', var->len_width + 2); // default wall
         squer_map[i + 1][var->len_width + 2] = '\0';
-        j = 0;
-        while (map[i][j])
+        for (j = 0; map[i][j]; j++)
         {
-            squer_map[i + 1][j + 1] = map[i][j];
-            j++;
+            if (map[i][j] != ' ')
+                squer_map[i + 1][j + 1] = map[i][j];
+            else
+                squer_map[i + 1][j + 1] = ' '; // keep space inside
         }
-        i++;
     }
-    squer_map[i + 1] = multi_space(var->len_width);
+
+    // Bottom line (walls)
+    squer_map[i + 1] = malloc(var->len_width + 3);
+    memset(squer_map[i + 1], '1', var->len_width + 2);
+    squer_map[i + 1][var->len_width + 2] = '\0';
+
     squer_map[i + 2] = NULL;
-    return (squer_map);
+    return squer_map;
 }
+
 
 int find_valid_map(t_var *vars)
 {
@@ -120,7 +125,7 @@ int find_valid_map(t_var *vars)
         return (0);
     }
     // here
-    if (!validate_map(vars, vars->map_s))
+    if (!validate_map(vars))
     {
         free2D(vars->map);
         free2D(vars->map_s);

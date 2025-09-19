@@ -6,7 +6,7 @@
 /*   By: bchafi <bchafi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 10:19:09 by bchafi            #+#    #+#             */
-/*   Updated: 2025/09/19 11:57:48 by bchafi           ###   ########.fr       */
+/*   Updated: 2025/09/19 13:33:00 by bchafi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,10 +94,8 @@ char    **map_copy_s(t_var *var, char **map);
 int     find_valid_map(t_var *vars);
 
 // valide_map.c
-int     is_valid_tile(char c);
-int     check_surrounded(char **map, int i, int j);
-int     validate_walls(char **map);
-int     validate_map(t_var *var, char **map_s);
+int     is_valid_char(char c);
+int     validate_map(t_var *vars);
 
 
 // funciton
