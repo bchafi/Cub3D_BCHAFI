@@ -6,7 +6,7 @@
 /*   By: bchafi <bchafi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 11:21:01 by bchafi            #+#    #+#             */
-/*   Updated: 2025/09/19 13:32:47 by bchafi           ###   ########.fr       */
+/*   Updated: 2025/09/20 09:54:57 by bchafi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,11 @@ int validate_map(t_var *vars)
     int i, j;
     int player_count = 0;
 
-    for (i = 1; vars->map_s[i + 1]; i++)
+    i = 2;
+    while (vars->map_s[i + 1])
     {
-        for (j = 1; vars->map_s[i][j]; j++)
+        j = 1;
+        while (vars->map_s[i][j])
         {
             char c = vars->map_s[i][j];
 
@@ -44,7 +46,9 @@ int validate_map(t_var *vars)
                     return (Error("Map not surrounded by walls"), 0);
                 }
             }
+            j++;
         }
+        i++;
     }
     if (player_count != 1)
         return (Error("Map must contain exactly one player spawn"), 0);

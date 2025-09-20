@@ -41,7 +41,7 @@ int main(int ac, char **av)
 	if (!find_valid_map(&vars))
 		return (free2D(vars.read_file), free_textures(&vars), 1);
 	/* Deployment */
-	Valid(&vars);
+	// Valid(&vars);
 	/* cleanup */
     free2D(vars.read_file); // get_full_file
     free_textures(&vars); // check_configuration
