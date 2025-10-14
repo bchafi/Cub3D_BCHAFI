@@ -1,14 +1,15 @@
-NO /mnt/homes/bchafi/Desktop/Cub3D_BCHAFI/map/textures/satorupng.png    
-SO /mnt/homes/bchafi/Desktop/Cub3D_BCHAFI/map/textures/satorupng.png 
-WE /mnt/homes/bchafi/Desktop/Cub3D_BCHAFI/map/textures/satorupng.png  
-EA /mnt/homes/bchafi/Desktop/Cub3D_BCHAFI/map/textures/satorupng.png
+NO /home/bkali/Desktop/Cub3D_BCHAFI/map/textures/satorupng.png
+SO /home/bkali/Desktop/Cub3D_BCHAFI/map/textures/satorupng.png
+WE /home/bkali/Desktop/Cub3D_BCHAFI/map/textures/satorupng.png
+EA /home/bkali/Desktop/Cub3D_BCHAFI/map/textures/satorupng.png
+
 
 F 255,255,255
 C 20,33,3
 
   111111111
-11100001
-10N0011
-10000011
+ 11100001
+101N1011
+ 10100011
  10000001
 11111111

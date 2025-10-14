@@ -47,5 +47,6 @@ int main(int ac, char **av)
     free_textures(&vars); // check_configuration
     free2D(vars.map); // find_valid_map
     free2D(vars.map_s); //find_valid_map
+	ft_printf("ok\n");
 	return (0);
 }

@@ -15,10 +15,8 @@
 void	*ft_calloc(size_t count, size_t size)
 {
 	char	*tmp;
-	size_t	i;
 	size_t	total_allocate;
 
-	i = 0;
 	if (count == 0 || size == 0)
 		return (malloc(0));
 	total_allocate = count * size;

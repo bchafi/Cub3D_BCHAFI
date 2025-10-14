@@ -57,13 +57,10 @@ int check_isnum(char *rgb_num)
 int valide_Color(char **rgb)
 {
 	int i;
-	int j;
-
 
 	i = 0;
 	while (rgb[i])
 	{
-		j = 0;
 		char *slice = ft_strtrim(rgb[i], " ");
 		if (!check_isnum(slice))
 			return (free(slice), 0);
@@ -95,7 +92,10 @@ int store_rgb(t_var *var, int is_floor, char **slice_rgb)
     if (is_floor)
         var->floor_color = (r << 16) | (g << 8) | b;
     else
+	{
         var->earth_color = (r << 16) | (g << 8) | b;
+	}
+
 	return (1);
 }
 
@@ -111,7 +111,9 @@ int check_color(t_var *var, char *line, int is_floor)
 	if (!side)
 		return (Error("Wrong RGB Color!!,), free(side)"), 0);
     while (line[i] == ' ' || line[i] == '\t')
-        i++;
+	{
+		i++;
+	}
 	rgb_str = ft_strdup(line + i);
 	if (!rgb_str)
 		return (Error("Wrong RGB Color!"), free(side), 0);

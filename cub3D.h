@@ -20,10 +20,10 @@
 #include "utils/get_next_line/get_next_line.h"
 #include "utils/libft/libft.h"
 #include "utils/ft_printf/ft_printf.h"
-
+    
 
 #define RED "\e[0;31m"
-#define GRN "\e[0;32m"
+#define GRN "\e[0;32m"  
 #define URED "\e[4;31m"
 #define UGRN "\e[4;32m"
 #define BHRED "\e[1;91m"

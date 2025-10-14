@@ -15,7 +15,7 @@
 void Error(char *str)
 {
 	ft_printf(RED URED BHRED);
-	write(2,"## Error\n##", 13);
+	write(2,"## Error\n##", 12);
 	write(2, str, ft_strlen(str));
 	ft_printf(" ##"reset);
 	write(2,"\n", 1);
@@ -102,6 +102,6 @@ char **get_full_file(int fd, char *arg, t_var *vars)
 	file = get_next_line(fd);
 	while (file)
 		(1) && (file2D[i++] = file, file = get_next_line(fd));
-	(1) && (file2D[i] = NULL);
+	file2D[i] = NULL;
 	return (close(fd), vars->len_lines = i, file2D);
 }
