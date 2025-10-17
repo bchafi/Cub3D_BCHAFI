@@ -1,0 +1,10 @@
+{
+  "files.associations": {
+    "*.embeddedhtml": "html",
+    "*.dbclient-js": "javascript",
+    "mlx42.h": "c",
+    "ft_printf.h": "c",
+    "libft.h": "c",
+    "cub3d.h": "c"
+  }
+}

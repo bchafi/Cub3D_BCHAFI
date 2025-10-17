@@ -1,0 +1,22 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "shell",
+			"label": "Make: Compile Cub3d",
+			"command": "make",
+			"args": [],
+			"detail": "Compile and Debug",
+			"group": {
+				"kind": "build",
+				"isDefault": true,
+			},
+			"presentation": {
+				"panel": "shared"
+			},
+			"problemMatcher": [
+				"$gcc"
+			]
+		}
+	]
+}
