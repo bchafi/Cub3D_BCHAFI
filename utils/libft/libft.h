@@ -17,7 +17,7 @@
 # include <unistd.h>
 # include <string.h>
 # include <limits.h>
-# include "../../cub3D.h"
+# include "../../include/parcing.h"
 
 
 int		ft_isalpha(int c);
