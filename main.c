@@ -47,12 +47,10 @@ void draw_map(t_cube *cub, char **av, int ac)
 	char **map;
 	t_obj obj;
 	uint32_t color;
+	t_var vars;
 	
 	i = 0;
 	j = 0;
-	
-	t_var vars;
-
 	if (ac != 2)
 	{
 		Error("** Uncomplite Argument **");
