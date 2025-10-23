@@ -41,7 +41,6 @@ void set_obj(t_obj *obj, size_t width, size_t height, size_t Xpos, size_t Ypos)
 
 void draw_map(t_cube *cub, char **av, int ac)
 {
-	
 	size_t	i;
 	size_t	j;
 	char **map;
