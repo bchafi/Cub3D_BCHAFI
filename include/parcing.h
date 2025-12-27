@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3D.h                                            :+:      :+:    :+:   */
+/*   parcing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bchafi <bchafi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bkali <bkali@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 10:19:09 by bchafi            #+#    #+#             */
-/*   Updated: 2025/09/19 13:33:00 by bchafi           ###   ########.fr       */
+/*   Updated: 2025/12/27 11:44:50 by bkali            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include <stdlib.h>
 #include <fcntl.h>
 #include <stdio.h>
+#include <stdint.h>
 #include "../utils/get_next_line/get_next_line.h"
 #include "../utils/libft/libft.h"
 #include "../utils/ft_printf/ft_printf.h"
@@ -43,14 +44,11 @@ typedef struct var
     char			*NO;
     char			*SO;
     char			*WE;
-    char			*EA;    
-    int				floor_color;
+    char			*EA;
     int             map_index;
-    unsigned int    earth_color;
-    unsigned int    count_rgb;
-    char            *tmp_r;
-    char            *tmp_g;
-    char            *tmp_b;
+    uint32_t        floor_color;
+    uint32_t        earth_color;
+    int             count_rgb;
     int             lines_map;
     char            **map;
     int             len_width;
@@ -104,6 +102,34 @@ int     validate_map(t_var *vars);
 // funciton
 char	**ft_split(char const *s, char c, t_var *var);
 
+
+
+
+// Raycasting
+#include "MLX42.h"
+
+#define WIDTH 620
+#define HEIGHT 480
+
+typedef struct s_mlx {
+    void    *mlx;
+    void    *img;
+    int     bits_per_pixel;
+    int     line_length;
+    int     endian;
+} t_mlx;
+
+typedef struct s_cub {
+    t_var       vars;
+    mlx_t*      mlx;
+    mlx_image_t*img;
+    double      posX;
+    double      posY;
+    double      dirX;
+    double      dirY;
+    double      planeX;
+    double      planeY;
+} t_cub;
 
 
 

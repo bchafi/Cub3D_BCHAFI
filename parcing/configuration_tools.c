@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   configuration_tools.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bchafi <bchafi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bkali <bkali@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 10:07:45 by bchafi            #+#    #+#             */
-/*   Updated: 2025/09/19 09:18:40 by bchafi           ###   ########.fr       */
+/*   Updated: 2025/12/27 07:31:36 by bkali            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,7 @@
 int is_line_map(char *file_line)
 {
     int i = 0;
-    if (!file_line || !*file_line)
-        return (0);
+
     while (file_line[i])
     {
         if (file_line[i] != '0' && file_line[i] != '1'
@@ -33,7 +32,7 @@ int handle_texture_line(t_var *vars, char **file_line, char *trimed, int i)
 {
     if (is_seeing(file_line, trimed, i, 3) || file_line[i][0] == ' ')
     {
-        Error("Duplicate texture/color configuration!");
+        Error("Duplicate texture/color configuration | ' '!");
         return (0);
     }
     if (!check_tex(vars, trimed))

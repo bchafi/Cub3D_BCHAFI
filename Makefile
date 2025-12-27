@@ -1,4 +1,5 @@
 CC = cc
+
 # Libraries
 LIBFT_DIR = utils/libft
 PRINTF_DIR = utils/ft_printf
@@ -10,16 +11,16 @@ GNL = $(GNL_DIR)/get_next_line.a
 
 RM = rm -rf
 
-CFLAGS = -Wall -Wextra -g
+CFLAGS = -Wall -Werror -Wextra -g
 
 MLX42FLAGS_LINUX= libmlx42_linux.a -Iinclude -ldl -lglfw -pthread -lm
 MLX42FLAGS_MAC= libmlx42_mac.a -Iinclude -lglfw
 
-RAYCAST = raycasting/hooks.c raycasting/utils.c raycasting/init_actor_data.c
-SOURCES = parcing/first_march.c parcing/parsing.c parcing/check_configure.c parcing/configuration_tools.c parcing/function_out.c \
-	parcing/ft_split.c parcing/map.c parcing/valide_map.c\
+SOURCES = main.c parcing/first_march.c parcing/parsing.c parcing/check_configure.c \
+		parcing/configuration_tools.c parcing/function_out.c \
+		parcing/ft_split.c parcing/map.c parcing/valide_map.c\
 
-SRC = main.c $(RAYCAST) $(SOURCES)
+SRC = main.c $(SOURCES)
 
 OBJ = $(SRC:.c=.o)
 
@@ -28,10 +29,10 @@ NAME = cub3D
 all: $(NAME)
 
 $(NAME): $(OBJ) $(LIBFT) $(PRINTF) $(GNL)
-	$(CC) $(CFLAGS) $^ $(MLX42FLAGS_LINUX) $(LIBFT) $(PRINTF) $(GNL) -o $@
+	$(CC) $(CFLAGS) $^  $(LIBFT) $(PRINTF) $(GNL) -o $@ $(MLX42FLAGS_LINUX)
 
 %.o: %.c include/cub3D.h
-	$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 $(LIBFT):
 	@$(MAKE) -C $(LIBFT_DIR)
@@ -57,4 +58,7 @@ fclean: clean
 	@$(MAKE) -C $(PRINTF_DIR) fclean
 	@$(MAKE) -C $(GNL_DIR) fclean
 
-re: all clean
+run: clean all
+	@./cub3D ./map/map1.cub
+
+re: fclean all

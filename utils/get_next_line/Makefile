@@ -1,19 +1,7 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: bchafi <bchafi@student.42.fr>              +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/11/26 14:48:22 by bchafi            #+#    #+#              #
-#    Updated: 2024/11/30 12:19:21 by bchafi           ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
 NAME = get_next_line.a
-HEADER = get_next_line.h
 CC = cc
 AR = ar -rc
+
 CFLAGS = -Wall -Wextra -Werror -D BUFFER_SIZE=42
 
 SOURCES = \
@@ -28,7 +16,7 @@ $(NAME) : $(OBJECTS)
 	$(AR) $@ $^
 
 
-%.o : %.c $(HEADER)
+%.o : %.c get_next_line.h
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean :

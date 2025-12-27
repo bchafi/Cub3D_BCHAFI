@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_configure.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bchafi <bchafi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bkali <bkali@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 10:07:45 by bchafi            #+#    #+#             */
-/*   Updated: 2025/09/19 10:47:48 by bchafi           ###   ########.fr       */
+/*   Updated: 2025/12/27 08:04:30 by bkali            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ int check_isnum(char *rgb_num)
 	}
 	return (1);
 }
+
 int valide_Color(char **rgb)
 {
 	int i;
@@ -77,16 +78,9 @@ int store_rgb(t_var *var, int is_floor, char **slice_rgb)
     int     g;
     int     b;
 
-    var->tmp_r = ft_strtrim(slice_rgb[0], " \t\n");
-    var->tmp_g = ft_strtrim(slice_rgb[1], " \t\n");
-    var->tmp_b = ft_strtrim(slice_rgb[2], " \t\n");
-    r = ft_atoi(var->tmp_r);
-    g = ft_atoi(var->tmp_g);
-    b = ft_atoi(var->tmp_b);
-    free(var->tmp_r);
-    free(var->tmp_g);
-    free(var->tmp_b);
-    (1) && (var->tmp_r = NULL, var->tmp_g = NULL, var->tmp_b = NULL);
+    r = ft_atoi(ft_strtrim(slice_rgb[0], " \t\n"));
+    g = ft_atoi(ft_strtrim(slice_rgb[1], " \t\n"));
+    b = ft_atoi(ft_strtrim(slice_rgb[2], " \t\n"));
     if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255)
         return (free2D(slice_rgb), Error("RGB values must be 0-255!"), 0);
     if (is_floor)
@@ -109,11 +103,9 @@ int check_color(t_var *var, char *line, int is_floor)
 	i = 1;
 	side = ft_strndup(line, 2);
 	if (!side)
-		return (Error("Wrong RGB Color!!,), free(side)"), 0);
+		return (Error("Wrong RGB Color!!,)"), free(side), 0);
     while (line[i] == ' ' || line[i] == '\t')
-	{
 		i++;
-	}
 	rgb_str = ft_strdup(line + i);
 	if (!rgb_str)
 		return (Error("Wrong RGB Color!"), free(side), 0);
@@ -144,7 +136,7 @@ t_var *check_configuration(char **file_line, t_var *vars)
         return (free_textures(vars), NULL);
     if (result == 2)
     {
-        // ft_printf(UGRN "configuration Is Ok.\n" reset);
+        ft_printf(UGRN "==> configuration Is Ok.\n" reset);
         return (vars);
     }
     if (len != 6)
