@@ -9,8 +9,6 @@ LIBFT = $(LIBFT_DIR)/libft.a
 PRINTF = $(PRINTF_DIR)/ft_printf.a
 GNL = $(GNL_DIR)/get_next_line.a
 
-RM = rm -rf
-
 CFLAGS = -Wall -Werror -Wextra -g
 
 MLX42FLAGS_LINUX= libmlx42_linux.a -Iinclude -ldl -lglfw -pthread -lm
