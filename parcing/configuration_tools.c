@@ -6,11 +6,11 @@
 /*   By: bkali <bkali@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 10:07:45 by bchafi            #+#    #+#             */
-/*   Updated: 2025/12/27 07:31:36 by bkali            ###   ########.fr       */
+/*   Updated: 2025/12/29 03:45:33 by bkali            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/parcing.h"
+#include "../parcing.h"
 
 
 int is_line_map(char *file_line)

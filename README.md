@@ -57,13 +57,13 @@ Player/0 touches space → Error("not surrounded") → 0
 Perfect map        → 1
     
 EVERY FAIL → EXACT FREE CHAIN:
-├── parcing() fail → free2D(read_file) + free_textures()
+├── parcing() fail → free2D(read_file) + free_texture()
 ├── check_tex() → free(side)
 ├── check_color() → free(side) + free(rgb_str) + free2D(slice_rgb)
 ├── get_map() → NULL (no alloc yet)
 ├── map_copy_s() → free2D(map)
 ├── validate_map() → free2D(map) + free2D(map_s)
-└── free_textures() → free(NO,SO,WE,EA) + NULL assign
+└── free_texture() → free(NO,SO,WE,EA) + NULL assign
 
 ✅ 1×NO + 1×SO + 1×WE + 1×EA + 1×F + 1×C = 6
 ✅ Exactly 1 player spawn (N/S/E/W)
@@ -153,7 +153,7 @@ cub3D/                           # Main project
 ├── parcing/                     # YOUR parser genius ✨
 ├── utils/
 │   ├── libft/                   # String functions
-│   ├── ft_printf/               # Printf replacement  
+│   ├── printf/               # Printf replacement  
 │   └── get_next_line/           # Read .cub file
 └── libmlx42_linux.a             # MLX42 library (window + keys)
 

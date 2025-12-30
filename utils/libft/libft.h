@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bchafi <bchafi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bkali <bkali@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/03 02:30:23 by bchafi            #+#    #+#             */
-/*   Updated: 2025/09/10 11:56:51 by bchafi           ###   ########.fr       */
+/*   Updated: 2025/12/29 03:43:35 by bkali            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 # include <unistd.h>
 # include <string.h>
 # include <limits.h>
-# include "../../include/parcing.h"
 
 
 int		ft_isalpha(int c);

@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bchafi <bchafi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bkali <bkali@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 00:16:58 by bchafi            #+#    #+#             */
-/*   Updated: 2025/09/17 11:21:17 by bchafi           ###   ########.fr       */
+/*   Updated: 2025/12/29 03:45:43 by bkali            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/parcing.h"
-
+#include "../parcing.h"
 
 static int	counter_words(char const *s, char c)
 {

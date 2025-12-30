@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/parcing.h"
+#include "../parcing.h"
 
 
 int first_march(int ac, char **av)
@@ -31,8 +31,6 @@ int first_march(int ac, char **av)
 	if(!check_configuration(vars.read_file, &vars))
 		return (free2D(vars.read_file), 1);
 	if (!find_valid_map(&vars))
-		return (free2D(vars.read_file), free_textures(&vars), 1);
-    // free_valid_map string
-	ft_printf("ok\n");
+		return (free2D(vars.read_file), free_texture(&vars), 1);
 	return (0);
 }

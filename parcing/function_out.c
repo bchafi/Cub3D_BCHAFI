@@ -6,11 +6,11 @@
 /*   By: bkali <bkali@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 10:07:45 by bchafi            #+#    #+#             */
-/*   Updated: 2025/12/26 17:55:15 by bkali            ###   ########.fr       */
+/*   Updated: 2025/12/29 04:31:17 by bkali            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/parcing.h"
+#include "../parcing.h"
 
 
 t_var *initial_state(t_var *vars)
@@ -26,7 +26,7 @@ t_var *initial_state(t_var *vars)
 	return (vars);
 }
 
-void free_textures(t_var *vars)
+void free_texture(t_var *vars)
 {
 	free(vars->NO);
 	vars->NO = NULL;
@@ -61,17 +61,17 @@ void Valid(t_var *vars)
     if (!vars || !vars->map)
         return;
     i = 0;
-	ft_printf("Line_file: %d, line_map: %d\n", vars->len_lines, vars->map_index);
-    ft_printf("                        -------/* Configuration */------\n");
-    ft_printf("vars->NO : %s\n", vars->NO ? vars->NO : "(null)");
-    ft_printf("vars->SO : %s\n", vars->SO ? vars->SO : "(null)");
-    ft_printf("vars->WE : %s\n", vars->WE ? vars->WE : "(null)");
-    ft_printf("vars->EA : %s\n", vars->EA ? vars->EA : "(null)");
-    ft_printf("vars->floor_color : %d\n", vars->floor_color);
-    ft_printf("vars->earth_color : %d\n", vars->earth_color);
-    ft_printf(GRN UGRN BHGRN);
-	ft_printf("<<<<<<< Everythhing IS Done >>>>>>\n");
-    ft_printf(reset);
+	printf("Line_file: %d, line_map: %d\n", vars->len_lines, vars->map_index);
+    printf("                        -------/* Configuration */------\n");
+    printf("vars->NO : %s\n", vars->NO ? vars->NO : "(null)");
+    printf("vars->SO : %s\n", vars->SO ? vars->SO : "(null)");
+    printf("vars->WE : %s\n", vars->WE ? vars->WE : "(null)");
+    printf("vars->EA : %s\n", vars->EA ? vars->EA : "(null)");
+    printf("vars->floor_color : %d\n", vars->floor_color);
+    printf("vars->earth_color : %d\n", vars->earth_color);
+    printf(GRN UGRN BHGRN);
+	printf("<<<<<<< Everythhing IS Done >>>>>>\n");
+    printf(reset);
 	write(1, "******* Map *******\n", 21);
     while (vars->map[i] != NULL)
     {

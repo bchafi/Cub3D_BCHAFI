@@ -6,11 +6,11 @@
 /*   By: bkali <bkali@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 10:07:45 by bchafi            #+#    #+#             */
-/*   Updated: 2025/12/27 08:04:30 by bkali            ###   ########.fr       */
+/*   Updated: 2025/12/29 04:31:17 by bkali            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/parcing.h"
+#include "../parcing.h"
 
 int check_tex(t_var *var, char *line)
 {
@@ -133,16 +133,16 @@ t_var *check_configuration(char **file_line, t_var *vars)
 	
     result = check_file_lines(file_line, vars, &len);
     if (result == 0)
-        return (free_textures(vars), NULL);
+        return (free_texture(vars), NULL);
     if (result == 2)
     {
-        ft_printf(UGRN "==> configuration Is Ok.\n" reset);
+        printf(UGRN "==> configuration Is Ok.\n" reset);
         return (vars);
     }
     if (len != 6)
     {
         Error("Missing texture/color configuration 1");
-        return (free_textures(vars), NULL);
+        return (free_texture(vars), NULL);
     }
     return (vars);
 }

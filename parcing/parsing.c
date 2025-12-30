@@ -6,18 +6,17 @@
 /*   By: bkali <bkali@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/07 10:06:14 by bchafi            #+#    #+#             */
-/*   Updated: 2025/12/26 18:37:34 by bkali            ###   ########.fr       */
+/*   Updated: 2025/12/29 04:15:02 by bkali            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/parcing.h"
+#include "../parcing.h"
 
 void Error(char *str)
 {
-	ft_printf(ROSE URED BHRED);
 	write(2,"## Error\n##", 12);
 	write(2, str, ft_strlen(str));
-	ft_printf(" ##"reset);
+	printf(" ##");
 	write(2,"\n", 1);
 }
 
