@@ -6,11 +6,12 @@
 /*   By: bkali <bkali@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/27 07:57:17 by bkali             #+#    #+#             */
-/*   Updated: 2026/01/05 08:25:30 by bkali            ###   ########.fr       */
+/*   Updated: 2026/01/04 21:55:41 by bkali            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parcing.h"
+#include "cub3d.h"
 
 void ft_free_alls(t_var *vars)
 {
@@ -73,7 +74,11 @@ int main(int ac, char **av)
     
     vars = parcing(ac, av);
 	if (!vars)
+	{
+		printf(GRN"## okay free is NULL ##\n"reset);
 		return (1);
+	}
+	ray_casting_entry(vars);
 	ft_free_alls(vars);
 	return (0);
 }

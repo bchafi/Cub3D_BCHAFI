@@ -9,16 +9,14 @@ GNL_DIR = utils/get_next_line
 LIBFT = $(LIBFT_DIR)/libft.a
 GNL = $(GNL_DIR)/libgnl.a
 
-SOURCES = \
-	parcing/first_march.c \
-	parcing/parsing.c \
-	parcing/check_configure.c \
-	parcing/configuration_tools.c \
-	parcing/function_out.c \
-	parcing/ft_split.c \
-	parcing/map.c \
-	parcing/valide_map.c \
-	main.c
+SOURCES = main.c \
+		  parcing/parsing.c \
+		  parcing/check_configure.c \
+		  parcing/configuration_tools.c \
+		  parcing/function_out.c \
+		  parcing/ft_split.c \
+		  parcing/map.c \
+		  parcing/valide_map.c \
 
 OBJ = $(SOURCES:.c=.o)
 
