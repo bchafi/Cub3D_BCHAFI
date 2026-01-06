@@ -18,7 +18,7 @@ SRC = ./Helpers/keys_events.c \
 		./Helpers/functions.c \
 		./Helpers/Functions.c \
       	Core.c \
-		main.c \
+		main.c bonus.c \
 		  parcing/parsing.c \
 		  parcing/check_configure.c \
 		  parcing/configuration_tools.c \

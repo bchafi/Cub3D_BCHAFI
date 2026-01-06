@@ -6,7 +6,7 @@
 /*   By: bkali <bkali@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 13:28:41 by often             #+#    #+#             */
-/*   Updated: 2026/01/06 09:59:00 by bkali            ###   ########.fr       */
+/*   Updated: 2026/01/06 10:51:37 by bkali            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -211,6 +211,12 @@ typedef struct s_unit
 	double				zoom;
 	char				**map;
 	t_var				*map_s;
+	int					key_w;
+    int					key_s;
+    int					key_a;
+    int					key_d;
+    int					key_left;
+    int					key_right;
 	t_ray				*ray;
 	t_intersection		*horizontal;
 	t_intersection		*vertical;
@@ -220,6 +226,10 @@ typedef struct s_unit
 	float				proj_plane_dist;
 	int					fd;
 }	t_unit;
+int key_press(int keycode, t_unit *vars);
+int key_release(int keycode, t_unit *vars);
+int update_loop(t_unit *data);
+
 
 typedef struct s_geometrie
 {
@@ -294,5 +304,8 @@ int					check_ifwall(t_unit *data, int x, int y);
 int					key_events(int key);
 int					close_window(void);
 int					keyevent_rest(int key, t_unit *data, t_key_events *keys);
+
+
+
 
 #endif
