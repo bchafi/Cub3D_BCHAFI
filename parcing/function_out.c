@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   function_out.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bkali <bkali@student.42.fr>                +#+  +:+       +#+        */
+/*   By: bchafi <bchafi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 10:07:45 by bchafi            #+#    #+#             */
-/*   Updated: 2026/01/04 19:17:12 by bkali            ###   ########.fr       */
+/*   Updated: 2026/01/05 17:16:08 by bchafi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../parcing.h"
 
-t_var *initial_state(t_var *vars)
+t_var	*initial_state(t_var *vars)
 {
 	vars->count_rgb = 0;
 	vars->north = NULL;
@@ -23,35 +23,35 @@ t_var *initial_state(t_var *vars)
 	vars->map = NULL;
 	vars->map_s = NULL;
 	vars->map_index = find_map_start(vars->read_file);
-    if (vars->map_index < 0)
-        return (Error("No valid map found &!"), NULL);;
+	if (vars->map_index < 0)
+		return (error("No valid map found &!"), NULL);
 	return (vars);
 }
 
-void Error(char *str)
+void	error(char *str)
 {
-	write(2,"## Error: ", 10);
+	write(2, "## Error: ", 10);
 	write(2, str, ft_strlen(str));
-	write(2,"##\n", 3);
+	write(2, "##\n", 3);
 }
 
-void free2D(char **array)
+void	free2d(char **array)
 {
-    int i;
+	int	i;
 
 	i = 0;
 	if (!array)
-        return;
-    while (array[i])
+		return ;
+	while (array[i])
 	{
-        free(array[i]);
+		free(array[i]);
 		array[i] = NULL;
-		i++;	
+		i++;
 	}
-    free(array);
+	free(array);
 }
 
-void free_texture(t_var *vars)
+void	free_texture(t_var *vars)
 {
 	if (vars->north)
 	{
@@ -75,14 +75,15 @@ void free_texture(t_var *vars)
 	}
 }
 
-int is_seeing(char **file_line, char *side, int end, int n)
+int	is_seeing(char **file_line, char *side, int end, int n)
 {
-	int i;
+	int		i;
+	char	*trimed;
 
 	i = -1;
 	while (file_line[++i] && i < end)
 	{
-		char *trimed = ft_strtrim(file_line[i], " \n\t");
+		trimed = ft_strtrim(file_line[i], " \n\t");
 		if (!ft_strncmp(trimed, side, n))
 			return (free(trimed), 1);
 		free(trimed);

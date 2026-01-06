@@ -1,12 +1,12 @@
-NO /home/bkali/Desktop/Cub3D_BCHAFI/CubeMain/Textures/NO.xpm
-SO /home/bkali/Desktop/Cub3D_BCHAFI/CubeMain/Textures/SO.xpm
-WE /home/bkali/Desktop/Cub3D_BCHAFI/CubeMain/Textures/WS.xpm
-EA /home/bkali/Desktop/Cub3D_BCHAFI/CubeMain/Textures/EA.xpm
+NO ./Textures/NO.xpm
+SO ./Textures/SO.xpm
+WE ./Textures/WS.xpm
+EA ./Textures/EA.xpm
 
 F 40,212,40
 C 212,186,255
 
-11101      111111
+11111      111111
 10001      100001
 100001111110000011111
 10000011100000000001 11111
