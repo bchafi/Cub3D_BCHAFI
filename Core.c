@@ -6,7 +6,7 @@
 /*   By: bkali <bkali@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/23 20:37:14 by sel-mir           #+#    #+#             */
-/*   Updated: 2026/01/06 10:58:04 by bkali            ###   ########.fr       */
+/*   Updated: 2026/01/07 21:27:57 by bkali            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,12 +62,7 @@ void	texture_initiation(t_unit *data)
 
 void	get_stuff_ready(t_unit *data, char **new, t_var *map)
 {
-	data->key_w = 0;
-    data->key_s = 0;
-    data->key_a = 0;
-    data->key_d = 0;
-    data->key_left = 0;
-    data->key_right = 0;
+	lenght_of_map(new, data);
 	(*data).view_angle = (60.0 * (M_PI / 180.0));
 	(*data).ang_between_rays = ((*data).view_angle / WIDTH);
 	(*data).proj_plane_dist = ((WIDTH / 2.0) / tan((*data).view_angle / 2.0));
@@ -80,27 +75,27 @@ void	get_stuff_ready(t_unit *data, char **new, t_var *map)
 	char_direction(data, (*map).direction);
 	(*data).player_posx = ((*map).x * CUBE_DIM) + (CUBE_DIM / 2.0);
 	(*data).player_posy = ((*map).y * CUBE_DIM) + (CUBE_DIM / 2.0);
-	(*data).angle = (M_PI / 2);
 	(*data).ray_tip_x = (*data).player_posx + 80 * cos((*data).angle);
 	(*data).ray_tip_y = (*data).player_posy + 80 * sin((*data).angle);
 	(*data).dir_vec_x = (*data).ray_tip_x - (*data).player_posx;
 	(*data).dir_vec_y = (*data).ray_tip_y - (*data).player_posy;
 }
 
-void ray_casting_entry(t_var *map, char **new)
+void	ray_casting_entry(t_var *map, char **new)
 {
-    t_unit  *data;
+	t_unit	*data;
+
+	data = ft_malloc(sizeof(t_unit));
+	get_stuff_ready(data, new, map);
+	initiating(data);
 	
-    data = ft_malloc(sizeof(t_unit));
-    get_stuff_ready(data, new, map);
-    initiating(data);
     mlx_hook((*data).mlx_window, 2, 1L<<0, key_press, data);
     mlx_hook((*data).mlx_window, 3, 1L<<1, key_release, data);
     mlx_hook((*data).mlx_window, 17, 0, close_window, data);
     mlx_loop_hook((*data).mlx, update_loop, data);
-    texture_initiation(data);
-    free_textures(data);
-    ray_inbulk(data);
-    alpha(data, 0);
-    mlx_loop((*data).mlx);
+	texture_initiation(data);
+	free_textures(data);
+	ray_inbulk(data);
+	alpha(data, 0);
+	mlx_loop((*data).mlx);
 }

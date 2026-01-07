@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Functions.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bkali <bkali@student.42.fr>                +#+  +:+       +#+        */
+/*   By: sel-mir <sel-mir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 17:11:17 by sel-mir           #+#    #+#             */
-/*   Updated: 2026/01/06 08:29:22 by bkali            ###   ########.fr       */
+/*   Updated: 2026/01/07 20:13:37 by sel-mir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,14 +70,20 @@ void	create_ray_rest(t_unit *data, t_intersection *vertical,
 	(*head).vertical = vertical;
 	(*head).vertical->is_vertical = 1;
 	(*head).nearest = smallest((*head).vertical, (*head).horizontal);
+	(*data).ray_array[id] = head;
+
 }
 
 void	create_ray(t_unit *data, t_intersection *vertical,
 			t_intersection *horizontal, int id)
 {
 	t_ray	*head;
+	static int	flag;
 
-	if (!(*data).ray)
+	if (!flag)
+		(*data).ray_array = ft_malloc(sizeof(t_ray) * WIDTH);
+	flag++;
+		if (!(*data).ray)
 	{
 		(*data).ray = ft_malloc(sizeof(t_ray));
 		head = (*data).ray;
@@ -88,6 +94,7 @@ void	create_ray(t_unit *data, t_intersection *vertical,
 		(*head).vertical = vertical;
 		(*head).vertical->is_vertical = 1;
 		(*head).nearest = smallest((*head).vertical, (*head).horizontal);
+		(*data).ray_array[id] = (*data).ray;
 		return ;
 	}
 	create_ray_rest(data, vertical, horizontal, id);

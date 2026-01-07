@@ -1,13 +1,13 @@
 /* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   Draw.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: bkali <bkali@student.42.fr>                +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/03 18:25:29 by sel-mir           #+#    #+#             */
-/*   Updated: 2026/01/06 10:00:15 by bkali            ###   ########.fr       */
-/*                                                                            */
+/* */
+/* :::      ::::::::   */
+/* Draw.c                                             :+:      :+:    :+:   */
+/* +:+ +:+         +:+     */
+/* By: sel-mir <sel-mir@student.42.fr>            +#+  +:+       +#+        */
+/* +#+#+#+#+#+   +#+           */
+/* Created: 2026/01/03 18:25:29 by sel-mir           #+#    #+#             */
+/* Updated: 2026/01/07 19:55:00 by sel-mir          ###   ########.fr       */
+/* */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
@@ -23,7 +23,8 @@ void	draw_walls(t_unit *data)
 	while (ray)
 	{
 		height = (CUBE_DIM / (*(*ray).nearest).distance)
-			* data->proj_plane_dist;
+		* data->proj_plane_dist;
+		
 		draw_straps(data, (*ray).id, (int)height, (*ray).nearest);
 		ray = (*ray).next;
 	}
@@ -57,7 +58,7 @@ void	fix_mirroring(float *partition, t_texture **Var,
 
 // This function Get u which strap of the texture image to draw
 //	based on which part of the wall the ray hit !
-//	
+
 void	initialyze_strapping(t_unit *data,
 		t_intersection *nearest, t_draw *drawing)
 {
@@ -83,42 +84,45 @@ void	draw_textures(t_unit *data, t_draw *drawing, int column)
 		(*drawing).tex_y = (int)(*drawing).tex_pos;
 		if ((*drawing).tex_y >= (*((*drawing).texture)).height)
 			(*drawing).tex_y = (*((*drawing).texture)).height - 1;
+		if ((*drawing).tex_y < 0)
+			(*drawing).tex_y = 0;
 		(*drawing).tex_pos += (*drawing).step;
 		if ((*drawing).tex_x >= (*((*drawing).texture)).width)
-			(*drawing).tex_x = (*((
-							*drawing).texture)).width - 1;
-		(*drawing).offset = ((
-					*drawing).tex_y * (*((*drawing).texture)).line_lenght)
-			+ ((*drawing).tex_x * ((*((*drawing).texture)).bpp / 8));
-		(*drawing).pixel_addr = (*((
-						*drawing).texture)).addr + (*drawing).offset;
+			(*drawing).tex_x = (*((*drawing).texture)).width - 1;
+		if ((*drawing).tex_x < 0)
+			(*drawing).tex_x = 0;
+		(*drawing).offset = ((*drawing).tex_y
+				* (*((*drawing).texture)).line_lenght)
+			+ ((*drawing).tex_x * ((
+						*((*drawing).texture)).bpp / 8));
+		(*drawing).pixel_addr = (
+				*((*drawing).texture)).addr + (*drawing).offset;
 		(*drawing).color = *(unsigned int *)(*drawing).pixel_addr;
 		safe_pixel_write(data, column, (*drawing).y, (*drawing).color);
 		(*drawing).y++;
 	}
 }
 
-// This fuction Draws The straps of the screen |||
-
 void	draw_straps(t_unit *data, int column,
 	float height, t_intersection *nearest)
 {
 	t_draw	drawing;
 
+	if (height <= 0)
+		return ;
 	initialyze_strapping(data, nearest, &drawing);
-	drawing.tex_x = (int)((*(drawing.texture)).width * drawing.partition);
 	drawing.draw_start = (HEIGHT - height) / 2;
 	drawing.draw_end = (HEIGHT + height) / 2;
 	if (drawing.draw_start < 0)
 		drawing.draw_start = 0;
 	if (drawing.draw_end >= HEIGHT)
-		drawing.draw_end = HEIGHT - 1;
+		drawing.draw_end = HEIGHT;
 	drawing.y = 0;
 	while (drawing.y < drawing.draw_start)
 		safe_pixel_write(data, column, drawing.y++, data->map_s->earth_color);
 	drawing.step = 1.0 * (*(drawing.texture)).height / height;
-	drawing.tex_pos = (drawing.draw_start - (HEIGHT - height) / 2)
-		* drawing.step;
+	drawing.tex_pos = (drawing.draw_start
+			- (HEIGHT - height) / 2) * drawing.step;
 	drawing.y = drawing.draw_start;
 	draw_textures(data, &drawing, column);
 	while (drawing.y < HEIGHT)

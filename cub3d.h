@@ -6,7 +6,7 @@
 /*   By: bkali <bkali@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 13:28:41 by often             #+#    #+#             */
-/*   Updated: 2026/01/06 10:51:37 by bkali            ###   ########.fr       */
+/*   Updated: 2026/01/07 21:52:29 by bkali            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,6 @@
 # ifndef RED
 #  define RED 0xFF0000
 # endif
-
 
 # ifndef M_PI
 #  define M_PI 3.14159265358979323846
@@ -194,7 +193,14 @@ typedef struct s_unit
 {
 	float				player_posx;
 	float				player_posy;
-
+//	Bader
+	int					key_w;
+    int					key_s;
+    int					key_a;
+    int					key_d;
+    int					key_left;
+    int					key_right;
+//
 	float				dir_vec_x;
 	float				dir_vec_y;
 
@@ -211,12 +217,6 @@ typedef struct s_unit
 	double				zoom;
 	char				**map;
 	t_var				*map_s;
-	int					key_w;
-    int					key_s;
-    int					key_a;
-    int					key_d;
-    int					key_left;
-    int					key_right;
 	t_ray				*ray;
 	t_intersection		*horizontal;
 	t_intersection		*vertical;
@@ -224,8 +224,13 @@ typedef struct s_unit
 	float				view_angle;
 	float				ang_between_rays;
 	float				proj_plane_dist;
-	int					fd;
+	int					maplinemax;
+	int					*lenght_line_map;
+	t_ray				**ray_array;
+	int					map_width;
 }	t_unit;
+
+
 int key_press(int keycode, t_unit *vars);
 int key_release(int keycode, t_unit *vars);
 int update_loop(t_unit *data);
@@ -286,6 +291,7 @@ void				texture_initiation(t_unit *data);
 void				free_textures(t_unit *dataa);
 void				arrows_handle(t_unit *data, int key);
 void				perform_movement(t_unit *data, float new_x, float new_y);
+void				lenght_of_map(char **map, t_unit *data);
 void				find_vertical_rest(t_calcul calcul,
 						t_geometrie geom, t_unit *data);
 void				find_vertical_rest(t_calcul calcul,
@@ -296,16 +302,13 @@ t_unit				*holder(t_unit *data);
 
 t_ray				*find_ray_byid(t_unit *data, int id);
 
-int					intial_horiz(t_unit *data, float ray_vec_x,
-						float ray_vec_y, float *coordi[3]);
-int					intial_vert(t_unit *data, float ray_vec_x,
-						float ray_vec_y, float *coordi[3]);
+int	intial_horiz(t_unit *data, float ray_vec_x,
+	float ray_vec_y, float *coordi[3]);
+int	intial_vert(t_unit *data, float ray_vec_x,
+		float ray_vec_y, float *coordi[3]);
 int					check_ifwall(t_unit *data, int x, int y);
 int					key_events(int key);
 int					close_window(void);
 int					keyevent_rest(int key, t_unit *data, t_key_events *keys);
-
-
-
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: bkali <bkali@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/06 10:24:48 by bkali             #+#    #+#             */
-/*   Updated: 2026/01/06 11:09:02 by bkali            ###   ########.fr       */
+/*   Updated: 2026/01/07 21:52:56 by bkali            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,13 +50,12 @@ int key_release(int keycode, t_unit *vars)
 
 int update_loop(t_unit *data)
 {
-    float   move_speed = 5.0f; // Slower speed for smooth loop
-    float   rot_speed = 0.07f; // Rotation speed
+    float   move_speed = 5.0f;
+    float   rot_speed = 0.07f;
     int     moved = 0;
     float   new_x;
     float   new_y;
 
-    // 1. Handle Rotation
     if (data->key_right)
     {
         data->angle -= rot_speed;
@@ -68,7 +67,6 @@ int update_loop(t_unit *data)
         moved = 1;
     }
 
-    // 2. Handle Movement (W/S)
     if (data->key_w || data->key_s)
     {
         float direction = (data->key_w) ? move_speed : -move_speed;
@@ -77,12 +75,10 @@ int update_loop(t_unit *data)
         perform_movement(data, new_x, new_y);
         moved = 1;
     }
-
-    // 3. Handle Strafing (A/D)
     if (data->key_a || data->key_d)
     {
         float strafe_angle = data->angle + (M_PI / 2.0);
-        float direction = (data->key_a) ? move_speed : -move_speed; // A is positive strafe here
+        float direction = (data->key_a) ? move_speed : -move_speed;
         
         new_x = data->player_posx + direction * cos(strafe_angle);
         new_y = data->player_posy + direction * sin(strafe_angle);
@@ -90,14 +86,12 @@ int update_loop(t_unit *data)
         moved = 1;
     }
 
-    // 4. Redraw ONLY if something changed
     if (moved)
     {
-        // Update ray tip for visual debugging if you use it
         data->ray_tip_x = data->player_posx + 80 * cos(data->angle);
         data->ray_tip_y = data->player_posy + 80 * sin(data->angle);
 
-        alpha(data, 0); // Raycasting
+        alpha(data, 0);
         mlx_put_image_to_window(data->mlx, data->mlx_window, data->img, 0, 0);
     }
     return (0);

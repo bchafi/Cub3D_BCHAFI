@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   keys_events.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sel-mir <sel-mir@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bkali <bkali@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/13 20:24:37 by sel-mir           #+#    #+#             */
-/*   Updated: 2026/01/05 19:44:54 by sel-mir          ###   ########.fr       */
+/*   Updated: 2026/01/07 21:31:40 by bkali            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,17 @@ void	arrows_handle(t_unit *data, int key)
 
 void	perform_movement(t_unit *data, float new_x, float new_y)
 {
-	if (check_ifwall(data, new_x, (*data).player_posy) == NO)
-		(*data).player_posx = new_x;
-	if (check_ifwall(data, (*data).player_posx, new_y) == NO)
-		(*data).player_posy = new_y;
+	float	pad;
+
+	pad = 10.0; // Small hitbox radius
+	// Check X movement with padding
+	if (check_ifwall(data, new_x + pad, data->player_posy) == NO &&
+	    check_ifwall(data, new_x - pad, data->player_posy) == NO)
+		data->player_posx = new_x;
+	// Check Y movement with padding
+	if (check_ifwall(data, data->player_posx, new_y + pad) == NO &&
+	    check_ifwall(data, data->player_posx, new_y - pad) == NO)
+		data->player_posy = new_y;
 }
 
 int	key_events(int key)
@@ -64,6 +71,12 @@ void	flush(void)
 
 void	initiating(t_unit *core)
 {
+	core->key_w = 0;
+	core->key_s = 0;
+	core->key_a = 0;
+	core->key_d = 0;
+	core->key_left = 0;
+	core->key_right = 0;
 	(*core).mlx = mlx_init();
 	if (!(*core).mlx)
 		flush();

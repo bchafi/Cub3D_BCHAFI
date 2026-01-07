@@ -17,8 +17,9 @@ SRC = ./Helpers/keys_events.c \
 		./Helpers/Ray_Casting.c \
 		./Helpers/functions.c \
 		./Helpers/Functions.c \
+		./Helpers/HelperFunction.c \
       	Core.c \
-		main.c bonus.c \
+		main.c \
 		  parcing/parsing.c \
 		  parcing/check_configure.c \
 		  parcing/configuration_tools.c \
@@ -26,6 +27,7 @@ SRC = ./Helpers/keys_events.c \
 		  parcing/ft_split.c \
 		  parcing/map.c \
 		  parcing/valide_map.c \
+		  bonus.c \
 
 
 OBJ = $(SRC:.c=.o)
@@ -36,7 +38,7 @@ NAME = cub3d
 
 all: $(NAME)
 
-%.o: %.c
+%.o: %.c cub3d.h parcing.h
 	$(CC) $(CFLAGS) -c $< -o $@
 
 $(NAME): $(OBJ) $(LIBFT) $(GNL)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   valide_map.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bchafi <bchafi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bkali <bkali@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 11:21:01 by bchafi            #+#    #+#             */
-/*   Updated: 2026/01/05 17:24:20 by bchafi           ###   ########.fr       */
+/*   Updated: 2026/01/07 21:24:33 by bkali            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ int	check_validaion_maps(t_var *vars, int i, int j, char c)
 	{
 		count++;
 		vars->direction = c;
-		vars->x = j;
-		vars->y = i;
+		vars->x = j - 1;
+		vars->y = i - 1;
 	}
 	if (c == '0' || c == 'N' || c == 'S' || c == 'E' || c == 'W')
 	{

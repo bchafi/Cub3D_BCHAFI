@@ -3,39 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   Ray_casting_H.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bkali <bkali@student.42.fr>                +#+  +:+       +#+        */
+/*   By: sel-mir <sel-mir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/26 12:08:27 by sel-mir           #+#    #+#             */
-/*   Updated: 2026/01/06 08:28:37 by bkali            ###   ########.fr       */
+/*   Updated: 2026/01/07 20:14:33 by sel-mir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
-
-int	check_ifwall(t_unit *data, int x, int y)
-{
-	char	**map;
-	int		gx;
-	int		gy;
-	int		i;
-
-	i = 0;
-	map = (*data).map;
-	gx = x / CUBE_DIM;
-	gy = y / CUBE_DIM;
-	while (map[i])
-		i++;
-	if (gy < 0 || gy >= i)
-		return (YES);
-	i = 0;
-	while (map[gy][i])
-		i++;
-	if ((gx < 0 || gx >= i))
-		return (YES);
-	if ((*data).map[gy][gx] == '1' || (*data).map[gy][gx] == ' ')
-		return (YES);
-	return (NO);
-}
 
 void	ray_inbulk(t_unit *data)
 {
@@ -60,7 +35,7 @@ void	set_ray_rest(float corrected_distance,
 	hold = NULL;
 	if (choice == HORIZONTAL)
 	{
-		hold = find_ray_byid(data, column_id[0]);
+		hold = (*data).ray_array[column_id[0]];
 		(*(*hold).horizontal).x = coordinates[0];
 		(*(*hold).horizontal).y = coordinates[1];
 		(*(*hold).horizontal).angle = coordinates[2];
@@ -68,7 +43,7 @@ void	set_ray_rest(float corrected_distance,
 	}
 	if (choice == VERTICAL)
 	{
-		hold = find_ray_byid(data, column_id[0]);
+		hold = (*data).ray_array[column_id[0]];
 		(*(*hold).vertical).x = coordinates[0];
 		(*(*hold).vertical).y = coordinates[1];
 		(*(*hold).vertical).angle = coordinates[2];
@@ -94,18 +69,4 @@ void	set_ray(t_unit *data, int choice, float coordinates[3], int column_id)
 	}
 	set_ray_rest(corrected_distance, data,
 		(int []){column_id, choice}, coordinates);
-}
-
-t_ray	*find_ray_byid(t_unit *data, int id)
-{
-	t_ray	*head;
-
-	head = (*data).ray;
-	while (head)
-	{
-		if ((*head).id == id)
-			return (head);
-		head = (*head).next;
-	}
-	return (NULL);
 }
