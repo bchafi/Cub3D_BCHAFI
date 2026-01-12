@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Ray_casting_H.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sel-mir <sel-mir@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bkali <bkali@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/26 12:08:27 by sel-mir           #+#    #+#             */
-/*   Updated: 2026/01/07 20:14:33 by sel-mir          ###   ########.fr       */
+/*   Updated: 2026/01/08 11:39:31 by bkali            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,4 +69,9 @@ void	set_ray(t_unit *data, int choice, float coordinates[3], int column_id)
 	}
 	set_ray_rest(corrected_distance, data,
 		(int []){column_id, choice}, coordinates);
+}
+
+void	flush(void)
+{
+	ft_free(NULL, FREE_ALL);
 }

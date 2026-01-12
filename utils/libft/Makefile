@@ -17,6 +17,7 @@ all: $(NAME)
 
 $(NAME): $(OBJECTS)
 	@$(AR) -rc $@ $^
+	@echo "LIBFT compiled successfully!"
 
 clean:
 	@rm -f $(OBJECTS) $(OBJECTSB)

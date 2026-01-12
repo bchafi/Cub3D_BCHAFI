@@ -6,7 +6,7 @@
 /*   By: sel-mir <sel-mir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 13:57:55 by sel-mir           #+#    #+#             */
-/*   Updated: 2026/01/07 19:14:32 by sel-mir          ###   ########.fr       */
+/*   Updated: 2026/01/07 22:24:18 by sel-mir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,19 +41,12 @@ void	find_horizontal_rest(t_calcul calcul, t_geometrie geom, t_unit *data)
 {
 	while (1)
 	{
-		/* FIX: Removed the manual bounds check (if x < 0 || y < 0 ...) 
-           We now let the loop continue until check_ifwall handles the boundary. */
-
 		calcul.check_y = (int)calcul.y_h;
 		if (geom.ray_vec_y < 0)
 			calcul.check_y = (int)calcul.y_h - 1;
-		
-		// If check_ifwall returns YES (which it must do for map boundaries),
-		// we return the valid coordinate instead of -1.
 		if (check_ifwall(data, (int)calcul.x_h, calcul.check_y) == YES)
 			return (set_ray(data, HORIZONTAL, (float []){calcul.x_h,
 					calcul.y_h, geom.angle}, geom.column_id), (void)0);
-		
 		calcul.x_h += calcul.x_i;
 		calcul.y_h += calcul.y_i;
 	}
@@ -100,17 +93,13 @@ void	find_vertical_rest(t_calcul calcul, t_geometrie geom, t_unit *data)
 {
 	while (1)
 	{
-		/* FIX: Removed manual bounds check here as well. */
-
 		calcul.check_x = (int)calcul.x_v;
 		if (geom.ray_vec_x < 0)
 			calcul.check_x = (int)calcul.x_v - 1;
-		
 		if (check_ifwall(data, calcul.check_x, (int)calcul.y_v) == YES)
 			return (set_ray(data, VERTICAL,
 					(float []){calcul.x_v, calcul.y_v, geom.angle},
 				geom.column_id), (void)0);
-		
 		calcul.x_v += calcul.x_i;
 		calcul.y_v += calcul.y_i;
 	}

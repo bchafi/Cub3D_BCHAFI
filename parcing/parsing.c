@@ -6,7 +6,7 @@
 /*   By: bchafi <bchafi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/07 10:06:14 by bchafi            #+#    #+#             */
-/*   Updated: 2026/01/05 17:20:15 by bchafi           ###   ########.fr       */
+/*   Updated: 2026/01/11 14:30:04 by bchafi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,4 +80,47 @@ char	**get_full_file(int fd, char *arg, t_var *vars)
 		(1) && (file2d[i++] = file, file = get_next_line(fd));
 	file2d[i] = NULL;
 	return (close(fd), vars->len_lines = i, file2d);
+}
+
+int	checks(int fd, t_var *vars, char *av)
+{
+	vars->read_file = get_full_file(fd, av, vars);
+	if (!vars->read_file)
+		return (free(vars), 0);
+	if (!check_configuration(vars->read_file, vars))
+	{
+		free_texture(vars);
+		free2d(vars->read_file);
+		free(vars);
+		return (0);
+	}
+	if (!find_valid_map(vars))
+	{
+		free2d(vars->read_file);
+		free_texture(vars);
+		free(vars);
+		return (0);
+	}
+	return (1);
+}
+
+t_var	*parcing(int ac, char **av)
+{
+	t_var	*vars;
+	int		fd;
+
+	if (ac != 2)
+	{
+		error("** Uncomplite Argument **");
+		exit(1);
+	}
+	fd = check_file(av[1]);
+	if (fd < 0)
+		exit(1);
+	vars = malloc(sizeof(t_var));
+	if (!vars)
+		return (NULL);
+	if (checks(fd, vars, av[1]) == 0)
+		return (NULL);
+	return (vars);
 }

@@ -1,13 +1,13 @@
 /* ************************************************************************** */
-/* */
-/* :::      ::::::::   */
-/* Draw.c                                             :+:      :+:    :+:   */
-/* +:+ +:+         +:+     */
-/* By: sel-mir <sel-mir@student.42.fr>            +#+  +:+       +#+        */
-/* +#+#+#+#+#+   +#+           */
-/* Created: 2026/01/03 18:25:29 by sel-mir           #+#    #+#             */
-/* Updated: 2026/01/07 19:55:00 by sel-mir          ###   ########.fr       */
-/* */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Draw.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sel-mir <sel-mir@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/01/07 22:21:47 by sel-mir           #+#    #+#             */
+/*   Updated: 2026/01/07 22:21:56 by sel-mir          ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
@@ -23,8 +23,7 @@ void	draw_walls(t_unit *data)
 	while (ray)
 	{
 		height = (CUBE_DIM / (*(*ray).nearest).distance)
-		* data->proj_plane_dist;
-		
+			* data->proj_plane_dist;
 		draw_straps(data, (*ray).id, (int)height, (*ray).nearest);
 		ray = (*ray).next;
 	}

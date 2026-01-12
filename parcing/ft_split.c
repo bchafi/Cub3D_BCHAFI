@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bkali <bkali@student.42.fr>                +#+  +:+       +#+        */
+/*   By: bchafi <bchafi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 00:16:58 by bchafi            #+#    #+#             */
-/*   Updated: 2025/12/29 03:45:43 by bkali            ###   ########.fr       */
+/*   Updated: 2026/01/11 14:30:02 by bchafi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,4 +74,16 @@ char	**ft_split(char const *s, char c, t_var *var)
 	if (!s)
 		return (NULL);
 	return (ft_other_split(s, c, var));
+}
+
+void	ft_free_alls(t_var *vars)
+{
+	if (vars->map)
+		free2d(vars->map);
+	if (vars->map_s)
+		free2d(vars->map_s);
+	free_texture(vars);
+	if (vars->read_file)
+		free2d(vars->read_file);
+	free(vars);
 }

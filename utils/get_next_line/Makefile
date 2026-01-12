@@ -16,13 +16,12 @@ all: $(NAME)
 
 $(NAME): $(OBJECTS)
 	@$(AR) -rc $(NAME) $(OBJECTS)
+	@echo "get_next_line library compiled successfully!"
 
 clean:
 	@rm -f $(OBJECTS)
-	@echo "Clean GNL!!"
 
 fclean: clean
 	@rm -f $(NAME)
-	@echo "Fclean GNL!!"
 
 re: fclean all

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Garbage_Collector.c                                :+:      :+:    :+:   */
+/*   garbage_collector.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sel-mir <sel-mir@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bkali <bkali@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/24 03:15:24 by sel-mir           #+#    #+#             */
-/*   Updated: 2026/01/05 19:49:47 by sel-mir          ###   ########.fr       */
+/*   Updated: 2026/01/12 14:06:46 by bkali            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,8 @@ void	ft_free(void *ptr, int flag)
 		last = malloc(sizeof(t_gcollct));
 		(*last).ptr = ptr;
 		(*last).next = NULL;
-		return (head = last, (void)0);
+		head = last;
+		return ;
 	}
 	if (!ptr && (flag == FREE_ALL || flag == FATAL))
 		quiting(data, head, flag);

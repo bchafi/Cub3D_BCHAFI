@@ -6,7 +6,7 @@
 /*   By: sel-mir <sel-mir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 17:11:17 by sel-mir           #+#    #+#             */
-/*   Updated: 2026/01/07 20:13:37 by sel-mir          ###   ########.fr       */
+/*   Updated: 2026/01/07 22:22:31 by sel-mir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,19 +71,18 @@ void	create_ray_rest(t_unit *data, t_intersection *vertical,
 	(*head).vertical->is_vertical = 1;
 	(*head).nearest = smallest((*head).vertical, (*head).horizontal);
 	(*data).ray_array[id] = head;
-
 }
 
 void	create_ray(t_unit *data, t_intersection *vertical,
 			t_intersection *horizontal, int id)
 {
-	t_ray	*head;
 	static int	flag;
+	t_ray		*head;
 
 	if (!flag)
 		(*data).ray_array = ft_malloc(sizeof(t_ray) * WIDTH);
 	flag++;
-		if (!(*data).ray)
+	if (!(*data).ray)
 	{
 		(*data).ray = ft_malloc(sizeof(t_ray));
 		head = (*data).ray;
