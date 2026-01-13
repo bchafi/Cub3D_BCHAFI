@@ -8,18 +8,7 @@ LIBFT = $(LIBFT_DIR)/libft.a
 
 CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address
 
-SRC = ./helpers/keys_events.c \
-      ./helpers/pixel_draw.c \
-      ./helpers/math.c \
-      ./helpers/garbage_collector.c \
-	  ./helpers/draw.c \
-	  ./helpers/ray_casting_h.c \
-	  ./helpers/ray_casting.c \
-	  ./helpers/functions.c \
-	  ./helpers/func_help.c \
-	  ./helpers/helper_function.c \
-	  ./Core.c \
-	  ./main.c \
+SRC = ./main.c \
 	  parcing/parsing.c \
 	  parcing/check_configure.c \
 	  parcing/configuration_tools.c \
@@ -27,7 +16,7 @@ SRC = ./helpers/keys_events.c \
 	  parcing/ft_split.c \
 	  parcing/map.c \
 	  parcing/valide_map.c \
-	  ./helpers/key_event2.c \
+	  ray_casting/ray_casting.c \
 
 OBJ = $(SRC:.c=.o)
 

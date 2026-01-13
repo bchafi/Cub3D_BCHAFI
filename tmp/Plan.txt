@@ -1,5 +1,0 @@
-
-
-                    - Am i getting the map ina 2D Array ? 
-                    - Struct Agreement !
-                    - 

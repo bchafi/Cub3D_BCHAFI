@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parcing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bchafi <bchafi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bkali <bkali@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/05 17:34:54 by bchafi            #+#    #+#             */
-/*   Updated: 2026/01/05 17:35:18 by bchafi           ###   ########.fr       */
+/*   Updated: 2026/01/12 18:56:58 by bkali            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ typedef struct var
     int             len_cline;
 }   t_var;
 
+// Parsing functions
 int     check_tex(t_var *var, char *line);
 int     check_isnum(char *rgb_num);
 int     valide_color(char **rgb);
