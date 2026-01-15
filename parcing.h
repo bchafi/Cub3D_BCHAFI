@@ -6,7 +6,7 @@
 /*   By: bkali <bkali@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/05 17:34:54 by bchafi            #+#    #+#             */
-/*   Updated: 2026/01/12 18:56:58 by bkali            ###   ########.fr       */
+/*   Updated: 2026/01/15 05:52:31 by bkali            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@
 #define BHRED "\e[1;91m"
 #define BHGRN "\e[1;92m"
 #define reset "\e[0m"
+
+typedef struct s_unit t_unit;
 
 typedef struct kval
 {
@@ -96,6 +98,85 @@ char    **get_full_file(int fd, char *arg, t_var *vars);
 int     is_valid_char(char c);
 int     validate_map(t_var *vars);
 t_var   *parcing(int ac, char **av);
-void    ft_free_alls(t_var *vars);
+void    ft_free_alls(t_var *vars, t_unit *player);
+
+// Raycasting functions
+
+# include <math.h>
+# include <limits.h>
+# include <float.h>
+# include "./mlx_linux/mlx.h"
+
+#  define HEIGHT 768
+#  define WIDTH 1024
+#  define CUBE_DIM 64
+#  define ESCP 65307
+#  define W_KEY 119
+#  define A_KEY 97
+#  define S_KEY 115
+#  define D_KEY 100
+#  define ARROW_RIGHT 65363
+#  define ARROW_LEFT 65361
+#  define CUBE 60
+#  define FOV 70.0 // Field of View in degrees
+#  define PI 3.14159265358979323846
+
+typedef struct s_img
+{
+    void    *img;
+    char    *addr;
+    int     bits_per_pixel;
+    int     line_length;
+    int     endian;
+    int     width;
+    int     height;
+}   t_img;
+
+typedef struct s_unit
+{
+    double      move_speed;
+    double      rot_speed;
+    double      pos_x;
+    double      pos_y;      
+    double      dir_x;
+    double      dir_y;      
+    double      plane_x;
+    double      plane_y;
+    double      angle_b_ray;
+    double      proj_plane_dist;
+    double      v_angle;
+    char       **map;
+    void        *mlx;
+    void        *win;
+    t_img       img;
+    t_img       screen;
+    char        *addr;
+    int         bits_per_pixel;
+    int         line_length;
+    int         endian;
+    int         Key_W;
+    int         Key_A;
+    int         Key_S;
+    int         Key_D;
+    int         Arrow_Right;
+    int         Arrow_Left;
+    t_img       tex[4];
+    
+}	t_unit;
+
+void    raycast_engine(t_var *vars);
+int     init_mlx(t_unit *core);
+void    init_player(t_unit *data, t_var *vars);
+int     main_work(t_unit *player);
+int     close_window(t_unit *player);
+int     key_press(int keycode, t_unit *vars);
+int     key_release(int keycode, t_unit *vars);
+void    load_one_texture(t_unit *p, int idx, char *path);
+void    init_textures(t_unit *p, t_var *vars);
+void    my_mlx_pixel_put(t_unit *data, int x, int y, int color);
+void    load_one_texture(t_unit *p, int i, char *path);
+void    init_textures(t_unit *p, t_var *vars);
+int     get_texture_color(t_img *tex, int x, int y);
+
 
 #endif

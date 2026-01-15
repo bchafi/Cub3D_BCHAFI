@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bchafi <bchafi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bkali <bkali@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 00:16:58 by bchafi            #+#    #+#             */
-/*   Updated: 2026/01/11 14:30:02 by bchafi           ###   ########.fr       */
+/*   Updated: 2026/01/15 05:43:48 by bkali            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ char	**ft_split(char const *s, char c, t_var *var)
 	return (ft_other_split(s, c, var));
 }
 
-void	ft_free_alls(t_var *vars)
+void	ft_free_alls(t_var *vars, t_unit *player)
 {
 	if (vars->map)
 		free2d(vars->map);
@@ -86,4 +86,13 @@ void	ft_free_alls(t_var *vars)
 	if (vars->read_file)
 		free2d(vars->read_file);
 	free(vars);
+	if (player)
+	{
+		if (player->screen.img)
+			mlx_destroy_image(player->mlx, player->screen.img);
+		if (player->win)
+			mlx_destroy_window(player->mlx, player->win);
+		if (player->mlx)
+			free(player->mlx);
+	}
 }

@@ -17,6 +17,8 @@ SRC = ./main.c \
 	  parcing/map.c \
 	  parcing/valide_map.c \
 	  ray_casting/ray_casting.c \
+	  ray_casting/key_events.c \
+	  ray_casting/initiation.c \
 
 OBJ = $(SRC:.c=.o)
 
