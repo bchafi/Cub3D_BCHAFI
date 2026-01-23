@@ -6,7 +6,7 @@
 /*   By: bkali <bkali@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/05 17:34:54 by bchafi            #+#    #+#             */
-/*   Updated: 2026/01/15 05:52:31 by bkali            ###   ########.fr       */
+/*   Updated: 2026/01/17 18:26:26 by bkali            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,7 +145,9 @@ typedef struct s_unit
     double      angle_b_ray;
     double      proj_plane_dist;
     double      v_angle;
-    char       **map;
+    char        **map;
+    int         map_width;
+    int         map_height;
     void        *mlx;
     void        *win;
     t_img       img;
@@ -177,6 +179,13 @@ void    my_mlx_pixel_put(t_unit *data, int x, int y, int color);
 void    load_one_texture(t_unit *p, int i, char *path);
 void    init_textures(t_unit *p, t_var *vars);
 int     get_texture_color(t_img *tex, int x, int y);
+
+
+
+void    move_player(t_unit *p);
+void    rotate_player(t_unit *p, int i);
+void    move_forward_back(t_unit *p, int direction);
+void    move_strafe(t_unit *p, int direction);
 
 
 #endif
